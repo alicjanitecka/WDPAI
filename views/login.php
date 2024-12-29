@@ -8,7 +8,15 @@
         <div class="container">
             <div class="left">
                 <h2> WELCOME BACK!</h2>
-                <form>
+                <form class="login" action="login" method="POST">
+                <div class="messages">
+                    <?php if(isset($messages)){
+                        foreach($messages as $message)
+                        echo $message;
+                    }
+                    ?>                  
+                </div>
+
                     <input name="email" type="text" placeholder="Enter your email address">
                     <input name="password" type="password" placeholder="Enter your password">
                     <div>
