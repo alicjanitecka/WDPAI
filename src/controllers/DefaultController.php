@@ -10,4 +10,11 @@ class DefaultController extends AppController{
     public function projects(){
         $this->render('dashboard');
     }
+
+    public function book(){
+        $this->render('findAPetsitter');
+    }
+    public function signup() {
+        $this->render('signup');
+    }
 }

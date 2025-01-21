@@ -11,7 +11,7 @@ services:
       - .:/app/
     links:
       - php
-
+      - db
   php:
     build:
       context: .
@@ -25,8 +25,8 @@ services:
       dockerfile: docker/db/Dockerfile
     ports:
       - "5432:5432"
-    networks:
-      - pg-network
+    # networks:
+    #   - pg-network
   
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -36,8 +36,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
-    networks:
-      - pg-network
+#     networks:
+#       - pg-network
   
-networks:
-  pg-network:
+# networks:
+#   pg-network:

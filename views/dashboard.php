@@ -53,7 +53,7 @@
 
             <button type="submit" class="search-button">
                 <img src="../Public/img/search.svg" alt="Search Icon" class="button-icon">
-                SEARCH
+  
             </button>
         </div>
 
