@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="../Public/css/dashboard.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/css/userDashboard.css"/>
     <title>PetZone - Dashboard</title>
 </head>
 <body>
@@ -14,18 +14,28 @@
                 <img src="../Public/img/home.svg" alt="">
                 home
             </a>
+
+
+
             <a href="#" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
+                my visits
+            </a>
+            <!-- <a href="#" class="nav-item">
+                <img src="../Public/img/pet.svg" alt="">
                 become a petsitter
-            </a>
-            <a href="/login" class="nav-item">
-                <img src="../Public/img/login.svg" alt="">
-                log in
-            </a>
-            <a href="/signup" class="nav-item">
-                <img src="../Public/img/login.svg" alt="">
-                sign up
-            </a>
+            </a> -->
+<!-- 
+            <a href="#" class="nav-item">
+                <img src="../Public/img/logout.svg" alt="">
+                log out
+            </a> -->
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="nav-item" style="border: none; cursor: pointer;">
+                    <img src="../Public/img/logout.svg" alt="">
+                    log out
+                </button>
+            </form>
         </div>
     </nav>
 

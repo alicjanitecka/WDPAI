@@ -19,6 +19,10 @@ class DatabaseConnector {
     public function connect()
     {
         try {
+            echo "Attempting to connect to database...<br>";
+            echo "Host: $this->host<br>";
+            echo "Database: $this->database<br>";
+            echo "Username: $this->username<br>";
             $conn = new PDO(
                 "pgsql:host=$this->host;port=5432;dbname=$this->database",
                 $this->username,
@@ -26,6 +30,7 @@ class DatabaseConnector {
             );
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connection successful!<br>";
             return $conn;
         }
         catch(PDOException $e) {

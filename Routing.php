@@ -17,12 +17,14 @@ class Routing{
 
 
     public static function run($url){
+        // echo "Requested URL: " . $url . "<br>";  // Debugowanie
         $segments = explode("/", $url);
         $action = $segments[0];  // Pierwsza część URL to akcja
         if(!array_key_exists($action, self::$routes)){
             die("Wrong url");
         }
         $controller = self::$routes[$action];
+        // echo "Controller: " . $controller . "<br>";  // Debugowanie
         $object = new $controller;
         
         // Sprawdzenie czy akcja istnieje w kontrolerze
