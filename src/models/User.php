@@ -4,18 +4,31 @@ class User{
     private $id;
     private $email;
     private $password;
-    private $name;
-    private $surname;
+    private $first_name;
+    private $last_name;
+    private $phone;
+    private $city;
+    private $street;
+    private $houseNumber;
+    private $apartmentNumber;
     private $avatarUrl;
 
     public function __construct(
-        $id, $email, $password, $name, $surname, $avatarUrl = null
+        $id, $email, $password, $first_name, $last_name, $phone=null, $city=null,
+        $street=null,
+        $houseNumber=null,
+        $apartmentNumber=null, $avatarUrl = null
     ) {
         $this->id= $id;
         $this->email = $email;
         $this->password = $password;
-        $this->name = $name;
-        $this->surname = $surname;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
+        $this->phone = $phone;
+        $this->city = $city;
+        $this->street = $street;
+        $this->houseNumber = $houseNumber;
+        $this->apartmentNumber = $apartmentNumber;
         $this->avatarUrl = $avatarUrl;
     }
     public function getId() {
@@ -30,15 +43,34 @@ class User{
     {
         return $this->password;
     }
-    public function getName() {
-        return $this->name;
+    public function getFirstName() {
+        return $this->first_name;
     }
 
-    public function getSurname() {
-        return $this->surname;
+    public function getLastName() {
+        return $this->last_name;
     }
 
     public function getAvatarUrl() {
         return $this->avatarUrl;
+    }
+    public function getPhone() {
+        return $this->phone;
+    }
+
+    public function getCity() {
+        return $this->city;
+    }
+
+    public function getStreet() {
+        return $this->street;
+    }
+
+    public function getHouseNumber() {
+        return $this->houseNumber;
+    }
+
+    public function getApartmentNumber() {
+        return $this->apartmentNumber;
     }
 }

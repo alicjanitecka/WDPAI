@@ -28,7 +28,6 @@ Routing::post('logout', 'SecurityController');
 Routing::post('updatePet', 'PetController');
 Routing::post('deletePet', 'PetController');
 Routing::post('addPet', 'PetController');
-
 Routing::post('updateUserProfile', 'UserController');
 
 Routing::run($path);

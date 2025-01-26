@@ -11,7 +11,7 @@ class PetRepository extends Repository {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ');
             
-            $params = [
+            return $stmt->execute([
                 $pet->getUserId(),
                 $pet->getName(),
                 $pet->getAge(),
@@ -19,44 +19,41 @@ class PetRepository extends Repository {
                 $pet->getBreed(),
                 $pet->getAdditionalInfo(),
                 $pet->getPhotoUrl()
-            ];
-            
-            error_log("Executing SQL with params: " . print_r($params, true));
-            
-            $result = $stmt->execute($params);
-            
-            error_log("SQL execution result: " . ($result ? "success" : "failure"));
-            
-            return $result;
+            ]);
         } catch (PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            throw $e;
+            return false;
         }
     }
     
 
     public function getPetsByUserId($userId) {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.pet WHERE user_id = ? ORDER BY name
-        ');
-        $stmt->execute([$userId]);
-    
-        $pets = [];
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($result as $pet) {
-            $pets[] = new Pet(
-                $pet['user_id'],
-                $pet['name'],
-                $pet['age'],
-                $pet['species'],
-                $pet['breed'],
-                $pet['additional_info'],
-                $pet['photo_url']
-            );
+        try {
+            $stmt = $this->database->connect()->prepare('
+                SELECT * FROM public.pet WHERE user_id = :userId
+            ');
+            
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = [];
+            
+            foreach ($pets as $pet) {
+                $result[] = new Pet(
+                    $pet['user_id'],
+                    $pet['name'],
+                    $pet['age'],
+                    $pet['species'],
+                    $pet['breed'],
+                    $pet['additional_info'],
+                    $pet['photo_url']
+                );
+            }
+            
+            return $result;
+        } catch (PDOException $e) {
+            return [];
         }
-    
-        return $pets;
     }
     
 

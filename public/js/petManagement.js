@@ -1,4 +1,4 @@
-alert('petManagement.js loaded');
+// alert('petManagement.js loaded');
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Pet management script loaded');
     console.log('Attempting to load petManagement.js');

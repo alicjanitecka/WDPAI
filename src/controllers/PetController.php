@@ -16,40 +16,28 @@ class PetController extends AppController {
 
     public function addPet() {
         session_start();
-        error_log("AddPet method called");
-        
+
         if (!isset($_SESSION['user_id'])) {
-            error_log("No user_id in session");
-            http_response_code(401);
-            return;
-        }
+        header('Location: /account');
+        exit();
+    }
     
         if ($this->isPost()) {
-            error_log("POST data: " . print_r($_POST, true));
             
-            try {
-                $pet = new Pet(
-                    $_SESSION['user_id'],
-                    $_POST['name'],
-                    $_POST['age'],
-                    $_POST['species'],
-                    $_POST['breed'],
-                    $_POST['additional_info']
-                );
-                
-                error_log("Created pet object");
-                
-                $result = $this->petRepository->addPet($pet);
-                error_log("Add pet result: " . ($result ? "success" : "failure"));
-                
-                http_response_code(200);
-                echo json_encode(['status' => 'success']);
-            } catch (Exception $e) {
-                error_log("Error adding pet: " . $e->getMessage());
-                http_response_code(500);
-                echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
-            }
+            $pet = new Pet(
+                $_SESSION['user_id'],
+                $_POST['name'],
+                $_POST['age'],
+                $_POST['species'],
+                $_POST['breed'],
+                $_POST['additional_info']
+            );
+            
+            $this->petRepository->addPet($pet);
         }
+        
+        header('Location: /account');
+        exit();
     }
     
 
@@ -66,12 +54,18 @@ class PetController extends AppController {
         if (!isset($_SESSION['user_id'])) {
             return $this->render('login');
         }
-        
+        $userRepository = new UserRepository();
+        $user = $userRepository->getUserById($_SESSION['user_id']);
         $userId = $_SESSION['user_id'];
         $pets = $this->petRepository->getPetsByUserId($userId);
         
+        if ($pets === null) {
+            $pets = [];
+        }
+        
         return $this->render('manageAccountUser', [
-            'pets' => $pets ?? []
+            'pets' => $pets,
+            'userData' => $user
         ]);
     }
     
@@ -91,7 +85,8 @@ class PetController extends AppController {
                 $_POST['age'],
                 $_POST['species'],
                 $_POST['breed'],
-                $_POST['additional_info']
+                $_POST['additional_info'],
+                $_POST['photo_url'] ?? '../Public/img/default-pet.svg'
             );
             $this->petRepository->updatePet($pet);
             error_log('Pet updated successfully');
