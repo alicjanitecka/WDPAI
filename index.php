@@ -16,6 +16,8 @@ Routing::get('signup', 'DefaultController');
 Routing::get('login', 'SecurityController');
 Routing::get('signup', 'SecurityController');
 Routing::get('logout', 'SecurityController');
+// Routing::get('account', 'DefaultController');
+Routing::get('account', 'PetController');
 
 
 
@@ -23,6 +25,10 @@ Routing::post('login', 'SecurityController');
 Routing::post('book', 'BookingController');
 Routing::post('signup', 'SecurityController');
 Routing::post('logout', 'SecurityController');
+Routing::post('updatePet', 'PetController');
+Routing::post('deletePet', 'PetController');
+Routing::post('addPet', 'PetController');
 
+Routing::post('updateUserProfile', 'UserController');
 
 Routing::run($path);

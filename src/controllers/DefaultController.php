@@ -26,5 +26,14 @@ class DefaultController extends AppController{
     
         $this->render('userDashboard');
     }
+    // public function account() {
+    //     session_start();
+    //     if (!isset($_SESSION['user_id'])) {
+    //         echo "<script>window.location.href = '/login';</script>";
+    //         exit();
+    //     }
+    //     $this->render('manageAccountUser');
+    // }
+    
 
 }

@@ -41,4 +41,27 @@ class UserRepository extends Repository {
             ':surname' => $user->getSurname()
         ]);
     }
+    public function updateUser($userId, $userData) {
+        error_log('Updating user in repository');
+        error_log('User data: ' . print_r($userData, true));
+        $stmt = $this->database->connect()->prepare('
+            UPDATE public.user 
+            SET first_name = ?, last_name = ?, phone = ?, 
+                city = ?, street = ?, house_number = ?, 
+                apartment_number = ?, avatar_url = ?
+            WHERE id = ?
+        ');
+        
+        $stmt->execute([
+            $userData['first_name'],
+            $userData['last_name'],
+            $userData['phone'],
+            $userData['city'],
+            $userData['street'],
+            $userData['house_number'],
+            $userData['apartment_number'],
+            $userData['avatar_url'],
+            $userId
+        ]);
+    }
 }

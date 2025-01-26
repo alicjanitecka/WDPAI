@@ -16,20 +16,19 @@
             </a>
 
 
-
+            <a href="#" class="nav-item">
+                <img src="../Public/img/pet.svg" alt="">
+                become a petsitter
+            </a>
             <a href="#" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
                 my visits
             </a>
-            <!-- <a href="#" class="nav-item">
-                <img src="../Public/img/pet.svg" alt="">
-                become a petsitter
-            </a> -->
-<!-- 
-            <a href="#" class="nav-item">
-                <img src="../Public/img/logout.svg" alt="">
-                log out
-            </a> -->
+            <a href="/account" class="nav-item">
+                <img src="../Public/img/login.svg" alt="">
+                my account
+            </a>
+
             <form action="/logout" method="POST" style="display: inline;">
                 <button type="submit" class="nav-item" style="border: none; cursor: pointer;">
                     <img src="../Public/img/logout.svg" alt="">

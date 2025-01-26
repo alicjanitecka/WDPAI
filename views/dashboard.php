@@ -14,10 +14,10 @@
                 <img src="../Public/img/home.svg" alt="">
                 home
             </a>
-            <a href="#" class="nav-item">
+            <!-- <a href="#" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
                 become a petsitter
-            </a>
+            </a> -->
             <a href="/login" class="nav-item">
                 <img src="../Public/img/login.svg" alt="">
                 log in
