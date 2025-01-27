@@ -43,9 +43,13 @@ class SecurityController extends AppController {
         }
 
         $_SESSION['user_id'] = $user->getId();
-        echo "<script>window.location.href = '/userDashboard';</script>";
+        $petsitterRepository = new PetsitterRepository();
+        if ($petsitterRepository->isPetsitter($_SESSION['user_id'])) {
+            header("Location: /dashboard");
+        } else {
+            header("Location: /userDashboard");
+        }
         exit();
-
     }
 
     public function signup() {

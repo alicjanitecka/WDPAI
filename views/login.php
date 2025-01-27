@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../Public/css/login.css"/>
         <title>PetZone</title>
     </head>
@@ -35,5 +36,5 @@
                 <img src="../Public/img/logo.svg">
             </div>
         </div>
-    <body>
+    </body>
 </html>

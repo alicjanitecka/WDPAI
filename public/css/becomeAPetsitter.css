@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700&display=swap');
+
 body {
-    /* position: fixed; */
-    top: 0;
-    left: 0;
     margin: 0;
     width: 100%;
     height: 100%;
@@ -13,9 +11,8 @@ body {
     background: #7073BB; 
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
-
 
 .left {
     flex: 1;
@@ -24,36 +21,32 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    /* padding: 2rem; */
-    
-
 }
-.right{
+
+.right {
     flex: 1;
     background: #7073BB;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* padding: 2rem; */
-    
 }
 
-.right img{
+.right img {
     max-width: 40%;
     height: auto;
     margin: 1em;
 }
 
 h2 {
-    font-size: 3.5em; 
+    font-size: 2em;
     color: #3F3F3F;
     margin-bottom: 0.5em;
-    margin-top: 2em;
+    margin-top: 1em;
+    text-align: center;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -62,18 +55,22 @@ form{
     padding: 2em;
 }
 
-form > input{
-    margin: 0 1em 1.5em 1em;
-    padding-left:  1.0em;
+form > input, form > textarea {
+    margin: 0 0.8em 1em 1em;
+    padding: 0.3em 0.7em;
     border-radius: 15px;
     border: 5px solid #7073BB;
     background: linear-gradient(90deg, rgba(217, 217, 217, 0.92) 0%, rgba(217, 217, 217, 0.92) 0.01%, rgba(217, 217, 217, 0.92) 100%);
-    padding: 0.5em, 0.5em; 
-    font-size: 1.2em;
+    font-size: 1.0em;
+}
+
+form > textarea {
+    height: 50px;
+    resize: vertical;
 }
 
 form label {
-    font-size: 1.2em; 
+    font-size: 0.9em; 
     display: flex; 
     align-items: center; 
     gap: 0.5em; 
@@ -82,99 +79,78 @@ form label {
 
 form input[type="checkbox"] {
     transform: scale(1.4);
-
     margin-left: 1.5em;
 }
 
-
 form p {
     text-align: center; 
-    margin-top: 2em; 
+    margin-top: 1.5em; 
     color: #3F3F3F;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 form p a {
     color: #3F3F3F; 
     text-decoration: underline; 
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
-
-form a {
-        text-align: center; 
-        display: block; 
-        width: 100%; 
-        color: #3F3F3F; 
-        text-decoration: underline; 
-        font-size: 1.2em; 
-        margin: 0 auto; 
-        padding: 0.5em 0; 
-}
-    
-
-
-button{
+button {
     margin: 2em 1em 1em 1em;
     border-radius: 15px;
     border: 1px solid rgba(0, 0, 0, 0.25);
     background: linear-gradient(90deg, rgba(114, 106, 191, 0.92) 0%, rgba(105, 109, 185, 0.92) 100%);
     color: white;
     line-height: 2em;
-    font-size: 1.2em;
+    font-size: 1em;
     cursor: pointer;
-
+    padding: 0.4em;
 }
+
 button:hover {
     background: linear-gradient(90deg, rgba(105, 109, 185, 1) 0%, rgba(114, 106, 191, 1) 100%);
     transform: scale(1.05);  
 }
-
 
 button:active {
     background: linear-gradient(90deg, rgba(95, 99, 175, 1) 0%, rgba(105, 109, 185, 1) 100%);
     transform: scale(0.95); 
 }
 
-
-/* Media query dla urządzeń mobilnych */
 @media (max-width: 768px) {
-    body {
-        background-color: red; /* Jeśli ekran ma szerokość poniżej 768px, tło stanie się czerwone */
-    }
     .container {
-        flex-direction: column; /* Zmiana układu na kolumnowy */
+        flex-direction: column;
     }
 
     .left, .right {
-        flex: none; /* Deaktywacja flex-grow */
-        width: 100%; /* Pełna szerokość dla każdego z elementów */
+        flex: none;
+        width: 100%;
     }
 
     .right img {
-        max-width: 60%; /* Mniejsze logo na mobilnych */
-        margin: 0 auto; /* Wyśrodkowanie logo */
+        max-width: 60%;
+        margin: 0 auto;
     }
 
     h2 {
-        font-size: 2.5em; /* Zmniejszenie rozmiaru tekstu */
+        font-size: 2.5em;
         margin-top: 1em;
         margin-bottom: 1em;
     }
 
     form {
-        padding: 1.5em; /* Zmniejszenie paddingu formularza */
+        padding: 1.5em;
     }
 
     button {
-        margin: 1em auto; /* Wyśrodkowanie przycisku */
+        margin: 1em auto;
     }
 
-    form > input {
-        font-size: 1em; /* Dostosowanie rozmiaru czcionki */
+    form > input, form > textarea {
+        font-size: 1em;
     }
 
     form label {
-        font-size: 1em; /* Mniejszy tekst przy checkboxie */
+        font-size: 1em;
     }
 }

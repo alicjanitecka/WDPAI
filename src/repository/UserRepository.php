@@ -26,6 +26,7 @@ class UserRepository extends Repository {
             $user['last_name'],
             $user['phone'],
         $user['city'],
+            $user['postal_code'],
         $user['street'],
         $user['house_number'],
         $user['apartment_number'],
@@ -54,6 +55,7 @@ public function updateUser($userId, $userData) {
                 last_name = :last_name,
                 phone = :phone,
                 city = :city,
+                postal_code=:postal_code,
                 street = :street,
                 house_number = :house_number,
                 apartment_number = :apartment_number
@@ -65,6 +67,7 @@ public function updateUser($userId, $userData) {
             ':last_name' => $userData['last_name'],
             ':phone' => $userData['phone'],
             ':city' => $userData['city'],
+            ':postal_code' => $userData['postal_code'],
             ':street' => $userData['street'],
             ':house_number' => $userData['house_number'],
             ':apartment_number' => $userData['apartment_number'],
@@ -79,6 +82,36 @@ public function updateUser($userId, $userData) {
         throw new Exception('Database error: ' . $e->getMessage());
     }
 }
+public function updateUserPartial($userId, $userData) {
+    if (empty($userData)) {
+        return true;
+    }
+
+    $setClause = [];
+    $params = [];
+
+    foreach ($userData as $key => $value) {
+        $setClause[] = "$key = :$key";
+        $params[":$key"] = $value;
+    }
+
+    $setClause = implode(', ', $setClause);
+    $params[':id'] = $userId;
+
+    try {
+        $stmt = $this->database->connect()->prepare("
+            UPDATE public.user 
+            SET $setClause
+            WHERE id = :id
+        ");
+
+        return $stmt->execute($params);
+    } catch (PDOException $e) {
+        error_log("Error updating user: " . $e->getMessage());
+        return false;
+    }
+}
+
 public function getUserById($id) {
     try {
         $stmt = $this->database->connect()->prepare('

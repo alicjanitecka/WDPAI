@@ -16,10 +16,10 @@
             </a>
 
 
-            <a href="/becomePetsitter" class="nav-item">
+            <!-- <a href="/becomePetsitter" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
                 become a petsitter
-            </a>
+            </a> -->
             <a href="#" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
                 my visits

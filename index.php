@@ -16,11 +16,12 @@ Routing::get('signup', 'DefaultController');
 Routing::get('login', 'SecurityController');
 Routing::get('signup', 'SecurityController');
 Routing::get('logout', 'SecurityController');
-// Routing::get('account', 'DefaultController');
 Routing::get('account', 'PetController');
+Routing::get('becomePetsitter', 'PetsitterController');
+Routing::get('dashboardPetsitter', 'PetsitterController');
 
 
-
+Routing::post('becomePetsitter', 'PetsitterController');
 Routing::post('login', 'SecurityController');
 Routing::post('book', 'BookingController');
 Routing::post('signup', 'SecurityController');
