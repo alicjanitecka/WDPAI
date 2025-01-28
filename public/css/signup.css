@@ -7,6 +7,7 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    position: fixed; 
 }
 
 .container {
@@ -101,4 +102,80 @@ form p {
 form p a {
     color: #3F3F3F; 
     text-decoration: underline; 
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+        position: static;
+    }
+
+    .container {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .left, .right {
+        flex: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .right {
+        order: -1; /* This moves the right section (logo) to the top */
+        padding: 0.8em 0;
+    }
+
+    .left {
+        padding: 0.9em;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .right img {
+        display: block;
+        width: 284px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        color: rgba(0, 0, 0, 0.58);
+        text-align: center;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 0.1em;
+    }
+
+    form {
+        padding: 0em;
+        max-width: 90%;
+        
+    }
+
+    button {
+        font-size: 0.8em;
+    }
+
+    form > input, .name-row input {
+        font-size: 0.7em;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .name-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .name-row input {
+        width: 100%;
+    }
+
+    form p, form a {
+        font-size: 0.9em;
+    }
 }

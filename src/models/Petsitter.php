@@ -3,14 +3,12 @@
 class Petsitter {
     private $id;
     private $userId;
-    private $address;
-    private $phone;
+private $description;
 
-    public function __construct($id, $userId, $address, $phone) {
+    public function __construct($id, $userId, $description) {
         $this->id = $id;
         $this->userId = $userId;
-        $this->address = $address;
-        $this->phone = $phone;
+        $this->description=$description;
     }
 
     public function getId() {
@@ -21,11 +19,9 @@ class Petsitter {
         return $this->userId;
     }
 
-    public function getAddress() {
-        return $this->address;
+    public function getDescription() {
+        return $this->description;
     }
 
-    public function getPhone() {
-        return $this->phone;
-    }
+
 }

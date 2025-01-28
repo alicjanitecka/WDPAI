@@ -50,8 +50,44 @@ class PetsitterController extends AppController {
         }
         
     }
-    public function dashboardPetsitter() {
-        $this->render('petsitterDashboard');
+    // public function dashboardPetsitter() {
+    //     $this->render('petsitterDashboard');
+    // }
+
+    public function updatePetsitterProfile() {
+        session_start();
+        if(!$this->isPost() || !isset($_SESSION['user_id'])) {
+            return $this->render('error', ['message' => 'Something went wrong']);
+        }
+    
+        $result = $this->petsitterRepository->updatePetsitter($_SESSION['user_id'], $_POST);
+        
+        if ($result) {
+            header('Location: /account');
+        } else {
+            return $this->render('error', ['message' => 'Update failed']);
+        }
+    }
+    
+    public function updatePetsitterServices() {
+        if (!$this->isPost()) {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+    
+        $userId = $_SESSION['user_id'];
+        $data = $_POST;
+    
+        $result = $this->petsitterRepository->updatePetsitterServices($userId, $data);
+    
+        if ($result) {
+            $_SESSION['success_message'] = 'Services updated successfully';
+        } else {
+            $_SESSION['error_message'] = 'Failed to update services';
+        }
+        header('Location: /manageAccount');
+        exit();
     }
     
 }    

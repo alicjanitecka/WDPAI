@@ -13,12 +13,13 @@ class User{
     private $houseNumber;
     private $apartmentNumber;
     private $avatarUrl;
+    private $description;
 
     public function __construct(
         $id, $email, $password, $first_name, $last_name, $phone=null, $city=null, $postal_code=null,
         $street=null,
         $houseNumber=null,
-        $apartmentNumber=null, $avatarUrl = null
+        $apartmentNumber=null, $avatarUrl = null, $description=null
     ) {
         $this->id= $id;
         $this->email = $email;
@@ -32,6 +33,7 @@ class User{
         $this->houseNumber = $houseNumber;
         $this->apartmentNumber = $apartmentNumber;
         $this->avatarUrl = $avatarUrl;
+        $this->description = $description;
     }
     public function getId() {
         return $this->id;
@@ -64,7 +66,7 @@ class User{
         return $this->city;
     }
     public function getPostalCode() {
-        return $this->street;
+        return $this->postal_code;
     }
     public function getStreet() {
         return $this->street;
@@ -76,5 +78,8 @@ class User{
 
     public function getApartmentNumber() {
         return $this->apartmentNumber;
+    }
+    public function getDescription() {
+        return $this->description; 
     }
 }

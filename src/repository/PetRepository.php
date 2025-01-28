@@ -12,6 +12,7 @@ class PetRepository extends Repository {
             ');
             
             return $stmt->execute([
+                $pet->getId(),
                 $pet->getUserId(),
                 $pet->getName(),
                 $pet->getAge(),
@@ -40,6 +41,7 @@ class PetRepository extends Repository {
             
             foreach ($pets as $pet) {
                 $result[] = new Pet(
+                    $pet['id'],
                     $pet['user_id'],
                     $pet['name'],
                     $pet['age'],

@@ -1,10 +1,8 @@
 <?php
 
-
 require_once 'AppController.php';
 require_once __DIR__ .'/../models/Pet.php';
 require_once __DIR__ . '/../repository/PetRepository.php';
-
 
 class PetController extends AppController {
     private $petRepository;
@@ -18,13 +16,13 @@ class PetController extends AppController {
         session_start();
 
         if (!isset($_SESSION['user_id'])) {
-        header('Location: /account');
-        exit();
-    }
+            header('Location: /manageAccount');
+            exit();
+        }
     
         if ($this->isPost()) {
-            
             $pet = new Pet(
+                null,
                 $_SESSION['user_id'],
                 $_POST['name'],
                 $_POST['age'],
@@ -36,39 +34,10 @@ class PetController extends AppController {
             $this->petRepository->addPet($pet);
         }
         
-        header('Location: /account');
+        header('Location: /manageAccount');
         exit();
     }
-    
 
-    // public function getPets() {
-    //     $userId = $_SESSION['user_id'];
-    //     $pets = $this->petRepository->getPetsByUserId($userId);
-        
-    //     return $this->render('manageAccountUser', [
-    //         'pets' => $pets
-    //     ]);
-    // }
-    public function account() {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            return $this->render('login');
-        }
-        $userRepository = new UserRepository();
-        $user = $userRepository->getUserById($_SESSION['user_id']);
-        $userId = $_SESSION['user_id'];
-        $pets = $this->petRepository->getPetsByUserId($userId);
-        
-        if ($pets === null) {
-            $pets = [];
-        }
-        
-        return $this->render('manageAccountUser', [
-            'pets' => $pets,
-            'userData' => $user
-        ]);
-    }
-    
     public function updatePet() {
         error_log('updatePet called');
         error_log('POST data: ' . print_r($_POST, true));
@@ -80,6 +49,7 @@ class PetController extends AppController {
     
         try {
             $pet = new Pet(
+                // $_POST['id'],
                 $_SESSION['user_id'],
                 $_POST['name'],
                 $_POST['age'],
@@ -96,5 +66,4 @@ class PetController extends AppController {
             http_response_code(500);
         }
     }
-    
 }

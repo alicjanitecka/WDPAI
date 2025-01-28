@@ -133,6 +133,7 @@ public function getUserById($id) {
             $user['last_name'],
             $user['phone'],
             $user['city'],
+            $user['postal_code'],
             $user['street'],
             $user['house_number'],
             $user['apartment_number'],

@@ -10,22 +10,31 @@
     <nav class="navbar">
 
         <div class="nav-links">
-            <a href="#" class="nav-item">
+            <a href="/dashboard" class="nav-item">
                 <img src="../Public/img/home.svg" alt="">
                 home
             </a>
-            <!-- <a href="#" class="nav-item">
+            <?php if (!$isPetsitter): ?>
+            <a href="/becomePetsitter" class="nav-item">
                 <img src="../Public/img/pet.svg" alt="">
                 become a petsitter
-            </a> -->
-            <a href="/login" class="nav-item">
-                <img src="../Public/img/login.svg" alt="">
-                log in
             </a>
-            <a href="/signup" class="nav-item">
-                <img src="../Public/img/login.svg" alt="">
-                sign up
+            <?php endif; ?>
+            <a href="#" class="nav-item">
+                <img src="../Public/img/pet.svg" alt="">
+                my visits
             </a>
+            <a href="/manageAccount" class="nav-item">
+                <img src="../Public/img/login.svg" alt="">
+                my account
+            </a>
+
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="nav-item" style="border: none; cursor: pointer;">
+                    <img src="../Public/img/logout.svg" alt="">
+                    log out
+                </button>
+            </form>
         </div>
     </nav>
 
@@ -80,4 +89,3 @@
     </main>
 </body>
 </html>
- 

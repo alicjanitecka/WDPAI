@@ -11,7 +11,9 @@ class Pet {
     private $photoUrl;
 
     // konstruktor
-    public function __construct($userId, $name, $age, $species, $breed, $additionalInfo, $photoUrl = null) {
+    public function __construct($id, $userId, $name, $age, $species, $breed, $additionalInfo, $photoUrl = null) {
+        
+        $this->id=$id;
         $this->userId = $userId;
         $this->name = $name;
         $this->age = $age;
@@ -21,7 +23,7 @@ class Pet {
         $this->photoUrl = $photoUrl;
     }
 
-    public function getId(): int {
+    public function getId(): ?int {
         return $this->id;
     }
 

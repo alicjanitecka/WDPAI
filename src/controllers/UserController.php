@@ -20,9 +20,10 @@ class UserController extends AppController {
         $result = $this->userRepository->updateUser($_SESSION['user_id'], $_POST);
         
         if ($result) {
-            header('Location: /account');
+            header('Location: /manageAccount');
         } else {
             return $this->render('error', ['message' => 'Update failed']);
         }
-    }    
+    }
+    
 }

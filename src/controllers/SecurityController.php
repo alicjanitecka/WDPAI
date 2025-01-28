@@ -47,7 +47,7 @@ class SecurityController extends AppController {
         if ($petsitterRepository->isPetsitter($_SESSION['user_id'])) {
             header("Location: /dashboard");
         } else {
-            header("Location: /userDashboard");
+            header("Location: /dashboard");
         }
         exit();
     }
