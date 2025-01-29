@@ -12,7 +12,6 @@ class PetRepository extends Repository {
             ');
             
             return $stmt->execute([
-                $pet->getId(),
                 $pet->getUserId(),
                 $pet->getName(),
                 $pet->getAge(),
@@ -75,14 +74,27 @@ class PetRepository extends Repository {
             $pet->getPhotoUrl(),
             $pet->getId()
         ]);
+        return true;
     }
 
-    public function deletePet($id) {
-        $stmt = $this->database->connect()->prepare('
-            DELETE FROM public.pet WHERE id = ?
-        ');
-        
-        $stmt->execute([$id]);
+    public function deletePetById($petId) {
+        try {
+            $conn = $this->database->connect();
+            $stmt = $conn->prepare('DELETE FROM public.pet WHERE id = :id');
+            $stmt->bindParam(':id', $petId, PDO::PARAM_INT);
+            $result = $stmt->execute();
+            
+            // if ($result && $stmt->rowCount() > 0) {
+            //     return true;
+            // }
+            return $result && $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log('Database error while deleting pet: ' . $e->getMessage());
+            return false;
+        }
     }
+    
+    
+    
     
 }

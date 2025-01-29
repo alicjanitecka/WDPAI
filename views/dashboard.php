@@ -21,7 +21,7 @@
             </a>
             <?php endif; ?>
             <a href="#" class="nav-item">
-                <img src="../Public/img/pet.svg" alt="">
+                <img src="../Public/img/calendar.svg" alt="">
                 my visits
             </a>
             <a href="/manageAccount" class="nav-item">

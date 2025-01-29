@@ -11,8 +11,8 @@ class UserController extends AppController {
         parent::__construct();
         $this->userRepository = new UserRepository();
     }
-    public function updateUserProfile() {
-        session_start();
+    public function updateUserProfile($userId, $data) {
+        // session_start();
         if(!$this->isPost() || !isset($_SESSION['user_id'])) {
             return $this->render('error', ['message' => 'Something went wrong']);
         }

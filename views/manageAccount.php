@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="../public/js/userProfile.js" defer></script>
     <script src="../public/js/petManagement.js" defer></script>
-    <!-- <script src="../public/js/tabSwitcher.js" defer></script> -->
 
     <title>PetZone - Manage Profile</title>
 </head>
@@ -56,7 +55,7 @@
 
                 <h2>MANAGE YOUR PROFILE</h2>
                 <div class="profile-form">
-                    <form action="/updateUserProfile" method="POST">
+                    <form action="/updateAccount" method="POST">
                         <div class="form-container">
                             <div class="form-left">
                                 <input type="text" name="first_name" value="<?= $user->getFirstName() ?>" placeholder="first name" <?= $isPetsitter ? 'required' : '' ?>readonly>
@@ -78,7 +77,6 @@
                                 </div>
                                 <?php if ($isPetsitter): ?>
                                     <textarea name="description" placeholder="Description" required readonly><?= $petsitter->getDescription() ?></textarea>
-
                                 <?php endif; ?>
                             </div>
 
@@ -110,9 +108,26 @@
                             </div>
                             <div class="pet-actions">
                                 <button class="edit-pet-btn">Edit</button>
-                                <button class="delete-pet-btn">Delete</button>
+                                <form action="/deletePet" method="POST" style="display: inline;">
+                                    <input type="hidden" name="id" value="<?= $pet->getId() ?>">
+                                    <button type="submit" class="delete-pet-btn">Delete</button>
+                                </form>
                             </div>
                         </div>
+                        <div class="edit-pet-form" style="display: none;" data-pet-id="<?= $pet->getId() ?>">
+                            <form action="/updatePet" method="POST">
+                                <input type="hidden" name="id" value="<?= $pet->getId() ?>">
+                                <input type="text" name="name" value="<?= $pet->getName() ?>" required>
+                                <input type="number" name="age" value="<?= $pet->getAge() ?>" required>
+                                <input type="text" name="species" value="<?= $pet->getSpecies() ?>" required>
+                                <input type="text" name="breed" value="<?= $pet->getBreed() ?>">
+                                <textarea name="additional_info"><?= htmlspecialchars($pet->getAdditionalInfo()) ?></textarea>
+                                <input type="file" name="photo" accept="image/*">
+                                <button type="submit">Save Changes</button>
+                                <button type="button" class="cancel-edit-pet">Cancel</button>
+                            </form>
+                        </div>
+
                     <?php endforeach; ?>
                 </div>
                 <button id="add-pet-btn">Add Pet</button>

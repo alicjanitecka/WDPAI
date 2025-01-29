@@ -54,8 +54,8 @@ class PetsitterController extends AppController {
     //     $this->render('petsitterDashboard');
     // }
 
-    public function updatePetsitterProfile() {
-        session_start();
+    public function updatePetsitterProfile($userId, $data) {
+        // session_start();
         if(!$this->isPost() || !isset($_SESSION['user_id'])) {
             return $this->render('error', ['message' => 'Something went wrong']);
         }

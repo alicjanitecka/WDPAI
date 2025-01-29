@@ -19,51 +19,112 @@ class PetController extends AppController {
             header('Location: /manageAccount');
             exit();
         }
-    
+
         if ($this->isPost()) {
-            $pet = new Pet(
-                null,
-                $_SESSION['user_id'],
-                $_POST['name'],
-                $_POST['age'],
-                $_POST['species'],
-                $_POST['breed'],
-                $_POST['additional_info']
-            );
-            
-            $this->petRepository->addPet($pet);
-        }
+            $userId = $_SESSION['user_id'];
         
-        header('Location: /manageAccount');
-        exit();
+            // Validate input data before creating a Pet object
+            $name = $_POST['name'] ?? '';
+            $age = $_POST['age'] ?? 0; // Ensure age is set
+            $species = $_POST['species'] ?? '';
+            $breed = $_POST['breed'] ?? '';
+            $additionalInfo = $_POST['additional_info'] ?? '';
+    
+            $pet = new Pet(
+                null, 
+                $userId,
+                $name,
+                $age,
+                $species,
+                $breed,
+                $additionalInfo
+            );
+    
+            if ($this->petRepository->addPet($pet)) {
+                header('Location: /manageAccount'); 
+            } else {
+                return $this->render('error', ['message' => 'Failed to add pet']);
+            }
+        }
+
+        return $this->render('error', ['message' => 'Invalid request']);
     }
 
     public function updatePet() {
-        error_log('updatePet called');
-        error_log('POST data: ' . print_r($_POST, true));
-        
-        if (!$this->isPost()) {
-            error_log('Not a POST request');
+        session_start();
+    
+        if (!$this->isPost() || !isset($_SESSION['user_id'])) {
+            error_log('Not a POST request or user not logged in');
             return $this->render('error', ['message' => 'Wrong request method']);
         }
     
-        try {
+            $petId = $_POST['id'] ?? null; 
+    
+            if (!$petId) {
+                error_log('Pet ID is missing');
+        return $this->render('error', ['message' => 'Pet ID is required']);
+            }
+    
+
+            $name = $_POST['name'] ?? '';
+            $age = $_POST['age'] ?? 0;
+            $species = $_POST['species'] ?? '';
+            $breed = $_POST['breed'] ?? '';
+            $additionalInfo = $_POST['additional_info'] ?? '';
+            $photoUrl = '../Public/img/default-pet.svg';
+
+            if (empty($name) || empty($species)) {
+                error_log('Missing required fields');
+                return $this->render('error', ['message' => 'Name and species are required']);
+            }
+
             $pet = new Pet(
-                // $_POST['id'],
+                $petId,
                 $_SESSION['user_id'],
-                $_POST['name'],
-                $_POST['age'],
-                $_POST['species'],
-                $_POST['breed'],
-                $_POST['additional_info'],
+                $name,
+                $age,
+                $species,
+                $breed,
+                $additionalInfo,
                 $_POST['photo_url'] ?? '../Public/img/default-pet.svg'
             );
-            $this->petRepository->updatePet($pet);
-            error_log('Pet updated successfully');
-            http_response_code(200);
+
+            $updateResult = $this->petRepository->updatePet($pet);
+            if ($updateResult === false) {
+                error_log('Failed to update pet in database');
+                return $this->render('error', ['message' => 'Failed to update pet']);
+            }
+
+            header('Location: /manageAccount');
+            exit();
+
+    }
+    public function deletePet() {
+        session_start();
+    
+        if (!$this->isPost() || !isset($_SESSION['user_id'])) {
+            return $this->render('error', ['message' => 'Unauthorized request']);
+        }
+    
+        try {
+            $petId = $_POST['id'] ?? null;
+    
+            if (!$petId) {
+                throw new Exception('Pet ID is required for deletion');
+            }
+    
+            error_log("Attempting to delete pet with ID: " . $petId);
+    
+            if ($this->petRepository->deletePetById($petId)) {
+                error_log("Pet with ID: " . $petId . " successfully deleted");
+                header('Location: /manageAccount');
+                exit();
+            } else {
+                throw new Exception('Failed to delete pet');
+            }
         } catch (Exception $e) {
-            error_log('Error updating pet: ' . $e->getMessage());
-            http_response_code(500);
+            error_log('Error deleting pet: ' . $e->getMessage());
+            return $this->render('error', ['message' => 'Failed to delete pet']);
         }
     }
 }

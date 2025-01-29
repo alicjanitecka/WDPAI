@@ -3,7 +3,7 @@
 class Petsitter {
     private $id;
     private $userId;
-private $description;
+    private $description;
 
     public function __construct($id, $userId, $description) {
         $this->id = $id;
