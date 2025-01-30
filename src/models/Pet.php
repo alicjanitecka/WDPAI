@@ -5,19 +5,19 @@ class Pet {
     private $userId;
     private $name;
     private $age;
-    private $species;
+    private $petType;
     private $breed;
     private $additionalInfo;
     private $photoUrl;
 
     // konstruktor
-    public function __construct($id, $userId, $name, $age, $species, $breed, $additionalInfo, $photoUrl = null) {
+    public function __construct($id, $userId, $name, $age, $petType, $breed, $additionalInfo, $photoUrl = null) {
         
         $this->id=$id;
         $this->userId = $userId;
         $this->name = $name;
         $this->age = $age;
-        $this->species = $species;
+        $this->petType = $petType;
         $this->breed = $breed;
         $this->additionalInfo = $additionalInfo;
         $this->photoUrl = $photoUrl;
@@ -54,13 +54,17 @@ class Pet {
     public function setAge(?int $age) {
         $this->age = $age;
     }
-
-    public function getSpecies(): ?string {
-        return $this->species;
+    public function getPetType(): string {
+        return $this->petType ?? 'Unknown';
     }
+    
 
-    public function setSpecies(?string $species) {
-        $this->species = $species;
+
+    public function setPetType(string $petType): void {
+        if (!in_array($petType, ['dog', 'cat', 'rodent'])) {
+            throw new InvalidArgumentException('Invalid pet type');
+        }
+        $this->petType = $petType;
     }
 
     public function getBreed(): ?string {

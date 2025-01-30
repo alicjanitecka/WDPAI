@@ -7,7 +7,7 @@ class PetRepository extends Repository {
             $conn = $this->database->connect();
             
             $stmt = $conn->prepare('
-                INSERT INTO public.pet (user_id, name, age, species, breed, additional_info, photo_url)
+                INSERT INTO public.pet (user_id, name, age, pet_type, breed, additional_info, photo_url)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ');
             
@@ -15,7 +15,7 @@ class PetRepository extends Repository {
                 $pet->getUserId(),
                 $pet->getName(),
                 $pet->getAge(),
-                $pet->getSpecies(),
+                $pet->getPetType(),
                 $pet->getBreed(),
                 $pet->getAdditionalInfo(),
                 $pet->getPhotoUrl()
@@ -44,7 +44,7 @@ class PetRepository extends Repository {
                     $pet['user_id'],
                     $pet['name'],
                     $pet['age'],
-                    $pet['species'],
+                    $pet['pet_type'],
                     $pet['breed'],
                     $pet['additional_info'],
                     $pet['photo_url']
@@ -61,14 +61,14 @@ class PetRepository extends Repository {
     public function updatePet(Pet $pet) {
         $stmt = $this->database->connect()->prepare('
             UPDATE public.pet 
-            SET name = ?, age = ?, species = ?, breed = ?, additional_info = ?, photo_url = ?
+            SET name = ?, age = ?, pet_type = ?, breed = ?, additional_info = ?, photo_url = ?
             WHERE id = ?
         ');
         
         $stmt->execute([
             $pet->getName(),
             $pet->getAge(),
-            $pet->getSpecies(),
+            $pet->getPetType(),
             $pet->getBreed(),
             $pet->getAdditionalInfo(),
             $pet->getPhotoUrl(),

@@ -70,14 +70,21 @@ class PetsitterController extends AppController {
     }
     
     public function updatePetsitterServices() {
-        if (!$this->isPost()) {
-            http_response_code(405);
-            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-            return;
+        session_start();
+        if (!$this->isPost() || !isset($_SESSION['user_id'])) {
+            return $this->render('error', ['message' => 'Unauthorized request']);
         }
     
         $userId = $_SESSION['user_id'];
-        $data = $_POST;
+        $data = [
+            'is_dog_sitter' => in_array('dog', $_POST['pet_types'] ?? []),
+            'is_cat_sitter' => in_array('cat', $_POST['pet_types'] ?? []),
+            'is_rodent_sitter' => in_array('rodent', $_POST['pet_types'] ?? []),
+            'care_at_owner_home' => in_array('care_at_owner_home', $_POST['services'] ?? []),
+            'care_at_petsitter_home' => in_array('care_at_petsitter_home', $_POST['services'] ?? []),
+            'dog_walking' => in_array('dog_walking', $_POST['services'] ?? []),
+            'hourly_rate' => $_POST['hourly_rate'] ?? 0
+        ];
     
         $result = $this->petsitterRepository->updatePetsitterServices($userId, $data);
     
@@ -89,5 +96,43 @@ class PetsitterController extends AppController {
         header('Location: /manageAccount');
         exit();
     }
+    public function updateAvailability() {
+        session_start();
+        if (!$this->isPost() || !isset($_SESSION['user_id'])) {
+            return $this->render('error', ['message' => 'Unauthorized request']);
+        }
+    
+        $startDate = $_POST['start_date'];
+        $endDate = $_POST['end_date'];
+        $isAvailable = (bool)$_POST['is_available'];
+
+        error_log("Start Date: " . $startDate);
+        error_log("End Date: " . $endDate);
+        error_log("Is Available: " . ($isAvailable ? 'true' : 'false'));
+    
+        // Generate array of dates between start and end date
+        $dates = [];
+        $current = new DateTime($startDate);
+        $end = new DateTime($endDate);
+        while ($current <= $end) {
+            $dates[] = $current->format('Y-m-d');
+            $current->modify('+1 day');
+        }
+
+        error_log("Generated dates: " . implode(', ', $dates));
+    
+        $petsitterId = $this->petsitterRepository->getPetsitterId($_SESSION['user_id']);
+        $result = $this->petsitterRepository->updatePetsitterAvailability($petsitterId, $dates, $isAvailable);
+    
+        if ($result) {
+            $_SESSION['success_message'] = 'Availability updated successfully';
+        } else {
+            $_SESSION['error_message'] = 'Failed to update availability';
+        }
+    
+        header('Location: /manageAccount');
+        exit();
+    }
+    
     
 }    

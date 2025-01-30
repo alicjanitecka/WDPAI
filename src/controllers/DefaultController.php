@@ -2,14 +2,19 @@
 
 require_once 'AppController.php';
 require_once __DIR__ . '/../repository/PetsitterRepository.php';
+require_once __DIR__ . '/../repository/PetRepository.php';
 class DefaultController extends AppController{
     private $petsitterRepository;
     private $userRepository;
+    private $petRepository;
+    private $userPet;
 
     public function __construct() {
         parent::__construct();
         $this->petsitterRepository = new PetsitterRepository();
         $this->userRepository = new UserRepository();
+        $this->petRepository = new PetRepository();
+
     }
 
     public function index(){
@@ -27,39 +32,22 @@ class DefaultController extends AppController{
         }
 
         $userId = $_SESSION['user_id'];
+        $userPets = $this->petRepository->getPetsByUserId($userId);
         $user = $this->userRepository->getUserById($userId);
         $isPetsitter = $this->petsitterRepository->isPetsitter($userId);
 
+
         return $this->render('dashboard', [
             'user' => $user,
-            'isPetsitter' => $isPetsitter
+            'isPetsitter' => $isPetsitter,
+            'userPets' => $userPets
         ]);
     }
 
-
-    public function book(){
-        $this->render('findAPetsitter');
-    }
     public function signup() {
         $this->render('signup');
     }
-    // public function userDashboard(){
-    //     session_start();
-    //     if (!isset($_SESSION['user_id'])) {
-    //         echo "<script>window.location.href = '/login';</script>";
-    //         exit();
-    //     }
-    
-    //     $this->render('dashboard');
-    // }
-    // public function account() {
-    //     session_start();
-    //     if (!isset($_SESSION['user_id'])) {
-    //         echo "<script>window.location.href = '/login';</script>";
-    //         exit();
-    //     }
-    //     $this->render('manageAccountUser');
-    // }
+
     
 
 }

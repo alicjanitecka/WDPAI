@@ -46,25 +46,27 @@
 
     <main>
 
-        <div class="search-bar">
+        <form action="/search" method="GET" class="search-bar">
             <div class="search-item">
                 <img src="../Public/img/calendar.svg" alt="calendar">
-                <input type="text" placeholder="choose the date">
+                <input type="date" name="start_date" placeholder="Start date" required>
+                <input type="date" name="end_date" placeholder="End date" required>
             </div>
             <div class="search-item">
                 <img src="../Public/img/home.svg" alt="home">
-                <input type="text" placeholder="enter the address">
+                <div class="pet-checkboxes">
+                <?php foreach ($userPets as $pet): ?>
+                <label>
+                    <input type="checkbox" name="pets[]" value="<?= $pet->getId() ?>" >
+                    <?= $pet->getName() ?>
+                </label>
+                <?php endforeach; ?>
+                </div>
             </div>
-            <div class="search-item">
-                <img src="../Public/img/pet.svg" alt="pet">
-                <input type="text" placeholder="choose your pet">
-            </div>
-
             <button type="submit" class="search-button">
                 <img src="../Public/img/search.svg" alt="Search Icon" class="button-icon">
-  
             </button>
-        </div>
+        </form>
 
         <div class="services-container">
 

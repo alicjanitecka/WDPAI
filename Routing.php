@@ -8,6 +8,7 @@ require_once 'src/controllers/SecurityController.php';
  require_once 'src/controllers/UserController.php';
  require_once 'src/controllers/PetsitterController.php';
  require_once 'src/controllers/AccountController.php';
+ require_once 'src/controllers/SearchController.php';
 class Routing{
     public static $routes;
     public static function get($url, $controller){

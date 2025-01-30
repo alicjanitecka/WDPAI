@@ -29,16 +29,23 @@ class AccountController extends AppController {
         if (!isset($_SESSION['user_id'])) {
             return $this->render('login');
         }
+        
         $userId = $_SESSION['user_id'];
         $user = $this->userRepository->getUserById($userId);
         $isPetsitter = $this->petsitterRepository->isPetsitter($userId);
         $pets = $this->petRepository->getPetsByUserId($userId);
-
+    
         $petsitter = null;
         $petsitterServices = null;
+        $availabilities = null;
+        
         if ($isPetsitter) {
+            $petsitterId = $this->petsitterRepository->getPetsitterId($userId);
             $petsitter = $this->petsitterRepository->getPetsitterByUserId($userId);
             $petsitterServices = $this->petsitterRepository->getPetsitterServices($userId);
+            if ($petsitterId) {
+                $availabilities = $this->petsitterRepository->getPetsitterAvailability($petsitterId);
+            }
         }
     
         return $this->render('manageAccount', [
@@ -46,9 +53,11 @@ class AccountController extends AppController {
             'isPetsitter' => $isPetsitter,
             'pets' => $pets,
             'petsitter' => $petsitter,
-            'petsitterServices' => $petsitterServices
+            'petsitterServices' => $petsitterServices,
+            'availabilities' => $availabilities
         ]);
     }
+    
     public function updateAccount() {
         session_start();
         if (!$this->isPost() || !isset($_SESSION['user_id'])) {

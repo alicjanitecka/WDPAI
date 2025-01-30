@@ -64,40 +64,25 @@
         </div>
 
         <div class="petsitter-list">
-            
-            <div class="petsitter-card">
-                <div class="profile-image"></div>
-                <div class="petsitter-info">
-                    <h3>TOM (30)</h3>
-                    <p>Experience: 5 years</p>
-                    <p>Services offered: walking the dog, cat care, dog care, overnight care</p>
-                    <p>Service Location: at pet sitter's home / at owner's home / outdoors</p>
+            <?php foreach ($petsitters as $petsitter): ?>
+                <div class="petsitter-card">
+                    <div class="profile-image"></div>
+                    <div class="petsitter-info">
+                        <h3><?= htmlspecialchars($petsitter['first_name']) ?> </h3>
+                        <p>Services offered: <?= PetsitterRepository::getServicesOffered($petsitter) ?></p>
+                        <p>Service Location: <?= PetsitterRepository::getServiceLocations($petsitter) ?></p>
+                    </div>
+                    <button class="book-btn">+ book now</button>
                 </div>
-                <button class="book-btn">+ book now</button>
-            </div>
-
-            <div class="petsitter-card">
-                <div class="profile-image"></div>
-                <div class="petsitter-info">
-                    <h3>SARA (25)</h3>
-                    <p>Experience: 2 years</p>
-                    <p>Services offered: cat care, overnight care</p>
-                    <p>Service Location: at owner's home</p>
-                </div>
-                <button class="book-btn">+ book now</button>
-            </div>
-
-            <div class="petsitter-card">
-                <div class="profile-image"></div>
-                <div class="petsitter-info">
-                    <h3>EMILY (23)</h3>
-                    <p>Experience: 1 years</p>
-                    <p>Services offered: cat care, dog care, overnight care</p>
-                    <p>Service Location: at owner's home / outdoors</p>
-                </div>
-                <button class="book-btn">+ book now</button>
-            </div>
+            <?php endforeach; ?>
         </div>
+
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a href="?page=<?= $i ?>&start_date=<?= $startDate ?>&end_date=<?= $endDate ?>&service_type=<?= $serviceType ?>&<?= http_build_query(['pets' => $petIds]) ?>" <?= $i == $currentPage ? 'class="active"' : '' ?>><?= $i ?></a>
+            <?php endfor; ?>
+        </div>
+
     </main>
 </body>
 </html>

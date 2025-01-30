@@ -68,22 +68,25 @@ class PetController extends AppController {
 
             $name = $_POST['name'] ?? '';
             $age = $_POST['age'] ?? 0;
-            $species = $_POST['species'] ?? '';
+            $petType = $_POST['pet_type'] ?? '';
             $breed = $_POST['breed'] ?? '';
             $additionalInfo = $_POST['additional_info'] ?? '';
             $photoUrl = '../Public/img/default-pet.svg';
 
-            if (empty($name) || empty($species)) {
+            if (empty($name) || empty($petType)) {
                 error_log('Missing required fields');
                 return $this->render('error', ['message' => 'Name and species are required']);
             }
-
+            if (!in_array($petType, ['dog', 'cat', 'rodent'])) {
+                error_log('Invalid pet type');
+                return $this->render('error', ['message' => 'Invalid pet type']);
+            }
             $pet = new Pet(
                 $petId,
                 $_SESSION['user_id'],
                 $name,
                 $age,
-                $species,
+                $petType,
                 $breed,
                 $additionalInfo,
                 $_POST['photo_url'] ?? '../Public/img/default-pet.svg'

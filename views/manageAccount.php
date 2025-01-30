@@ -99,7 +99,7 @@
                             <div class="pet-info">
                                 <h3><?= $pet->getName() ?></h3>
                                 <p>Age: <?= $pet->getAge() ?></p>
-                                <p>Species: <?= $pet->getSpecies() ?></p>
+                                <p>Pet Type: <?= ucfirst($pet->getPetType()) ?></p>
                                 <p>Breed: <?= $pet->getBreed() ?></p>
                                 <p>Additional info: <?= $pet->getAdditionalInfo() ?></p>
                             </div>
@@ -119,7 +119,11 @@
                                 <input type="hidden" name="id" value="<?= $pet->getId() ?>">
                                 <input type="text" name="name" value="<?= $pet->getName() ?>" required>
                                 <input type="number" name="age" value="<?= $pet->getAge() ?>" required>
-                                <input type="text" name="species" value="<?= $pet->getSpecies() ?>" required>
+                                <select name="pet_type" required>
+                                    <option value="dog">Dog</option>
+                                    <option value="cat">Cat</option>
+                                    <option value="rodent">Rodent</option>
+                                </select>
                                 <input type="text" name="breed" value="<?= $pet->getBreed() ?>">
                                 <textarea name="additional_info"><?= htmlspecialchars($pet->getAdditionalInfo()) ?></textarea>
                                 <input type="file" name="photo" accept="image/*">
@@ -135,7 +139,11 @@
                     <form action="/addPet" method="POST">
                     <input type="text" name="name" placeholder="Pet Name" required>
                     <input type="number" name="age" placeholder="Age" required>
-                    <input type="text" name="species" placeholder="Species" required>
+                    <select name="pet_type" required>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="rodent">Rodent</option>
+                    </select>
                     <input type="text" name="breed" placeholder="Breed">
                     <textarea name="additional_info" placeholder="Additional Info"></textarea>
                     <input type="file" name="photo" accept="image/*">
@@ -148,11 +156,66 @@
             <?php if ($isPetsitter): ?>
                 <div class="content-section services-info" data-tab="services">
                     <h2>YOUR SERVICES</h2>
-                    <form action="/updatePetsitterServices" method="POST">
+                    <!-- <form action="/updatePetsitterServices" method="POST"> -->
 
-                        <h3>Availability</h3>
-                        <!-- Calendar or availability selection -->
-                        
+                    <h3>Availability</h3>
+                        <div class="availability-section">
+                            <form action="/updateAvailability" method="POST">
+                                <div class="date-range">
+                                    <label>From: <input type="date" name="start_date" required></label>
+                                    <label>To: <input type="date" name="end_date" required></label>
+                                </div>
+                                <div class="availability-status">
+                                    <label>
+                                        <input type="radio" name="is_available" value="1" checked> Available
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="is_available" value="0"> Unavailable
+                                    </label>
+                                </div>
+                                <button type="submit">Update Availability</button>
+                            </form>
+                        </div>
+                        <div class="availability-calendar">
+    <h3>Current Availability</h3>
+    <table class="availability-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if ($availabilities && count($availabilities) > 0): ?>
+                <?php foreach ($availabilities as $availability): ?>
+                    <tr>
+                        <td><?= $availability['date'] ?></td>
+                        <td><?= $availability['is_available'] ? 'Available' : 'Not Available' ?></td>
+                        <td>
+                            <form action="/updateAvailability" method="POST" style="display: inline;">
+                                <input type="hidden" name="start_date" value="<?= $availability['date'] ?>">
+                                <input type="hidden" name="end_date" value="<?= $availability['date'] ?>">
+                                <input type="hidden" name="is_available" value="<?= $availability['is_available'] ? '0' : '1' ?>">
+                                <button type="submit" class="<?= $availability['is_available'] ? 'available' : 'unavailable' ?>">
+                                    <?= $availability['is_available'] ? 'Set Unavailable' : 'Set Available' ?>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="3">No availability data</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+                        <form action="/updatePetsitterServices" method="POST">
                         <h3>Pet Types</h3>
                         <label><input type="checkbox" name="pet_types[]" value="dog" <?= $petsitterServices['pet_types']['dog'] ? 'checked' : '' ?>> Dogs</label>
                         <label><input type="checkbox" name="pet_types[]" value="cat" <?= $petsitterServices['pet_types']['cat'] ? 'checked' : '' ?>> Cats</label>
