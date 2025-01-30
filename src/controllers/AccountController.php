@@ -66,7 +66,6 @@ class AccountController extends AppController {
 
         $userId = $_SESSION['user_id'];
 
-        // Update user profile
         if (isset($_POST['first_name']) || isset($_POST['last_name']) || isset($_POST['phone']) || 
             isset($_POST['city']) || isset($_POST['postal_code']) || isset($_POST['street']) || 
             isset($_POST['house_number']) || isset($_POST['apartment_number'])) {
@@ -74,12 +73,10 @@ class AccountController extends AppController {
             $this->userController->updateUserProfile($userId, $_POST);
         }
 
-        // Update petsitter profile
         if (isset($_POST['description'])) {
             $this->petsitterController->updatePetsitterProfile($userId, $_POST);
         }
 
-        // Redirect after successful updates
         header('Location: /manageAccount');
         exit();
     }

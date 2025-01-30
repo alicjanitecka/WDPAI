@@ -56,4 +56,76 @@ document.addEventListener('DOMContentLoaded', function() {
             servicesContainer.style.display = 'flex';
         });
     });
-});
+
+
+
+
+
+        
+
+        function displayResults(data) {
+            if (data.length === 0) {
+                searchResults.innerHTML = '<p>No petsitters found</p>';
+            } else {
+                let html = '';
+                data.forEach(function(petsitter) {
+                    html += `
+                        <div class="petsitter-card">
+                            <div class="petsitter-info">
+                                <img src="${petsitter.avatar || '../Public/img/default-avatar.svg'}" alt="Avatar">
+                                <div class="petsitter-details">
+                                    <h3>${petsitter.first_name} ${petsitter.last_name}</h3>
+                                    <p>${petsitter.location || 'Location not specified'}</p>
+                                    <p>Price: $${petsitter.price || '0'}/hour</p>
+                                </div>
+                            </div>
+                            <button class="book-button" onclick="bookPetsitter(${petsitter.id})">Book</button>
+                        </div>
+                    `;
+                });
+                searchResults.innerHTML = html;
+            }
+            searchResults.style.display = 'block';
+        }
+        
+        window.bookPetsitter = function(petsitterId) {
+            const requestData = {
+                petsitter_id: parseInt(petsitterId),
+                start_date: document.querySelector('input[name="start_date"]').value,
+                end_date: document.querySelector('input[name="end_date"]').value,
+                care_type: document.querySelector('select[name="care_type"]').value,
+                pets: Array.from(document.querySelectorAll('input[name="pets[]"]:checked')).map(input => parseInt(input.value))
+            };
+        
+            if (confirm('Are you sure you want to book this petsitter?')) {
+                fetch('/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data.success) {
+                        alert('Booking successful!');
+                    } else {
+                        alert('Booking failed: ' + data.message);
+                    }
+                })
+                .catch(function(error) {
+                    alert('An error occurred while booking');
+                });
+            }
+        };
+        
+        
+        
+        
+        
+    
+    });
+        

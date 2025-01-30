@@ -50,12 +50,9 @@ class PetsitterController extends AppController {
         }
         
     }
-    // public function dashboardPetsitter() {
-    //     $this->render('petsitterDashboard');
-    // }
+
 
     public function updatePetsitterProfile($userId, $data) {
-        // session_start();
         if(!$this->isPost() || !isset($_SESSION['user_id'])) {
             return $this->render('error', ['message' => 'Something went wrong']);
         }
@@ -110,7 +107,6 @@ class PetsitterController extends AppController {
         error_log("End Date: " . $endDate);
         error_log("Is Available: " . ($isAvailable ? 'true' : 'false'));
     
-        // Generate array of dates between start and end date
         $dates = [];
         $current = new DateTime($startDate);
         $end = new DateTime($endDate);

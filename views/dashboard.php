@@ -85,7 +85,7 @@
     </button>
 </form>
 <div class="search-results" id="searchResults" style="display: none;">
-    <!-- Tu będą wyświetlane wyniki -->
+
 </div>
 
 
@@ -95,19 +95,19 @@
             <div class="service-card">
                 <h3>Care at your home</h3>
                 <img src="../Public/img/home-care.svg" alt="home care">
-                <p>Find out more</p>
+                <p>Book a petsitter to visit your home! Your pet stays in a familiar environment while the petsitter comes by several times a day.</p>
             </div>
 
             <div class="service-card">
                 <h3>Care at the petsitter's home</h3>
                 <img src="../Public/img/petsitter-care.svg" alt="petsitter care">
-                <p>Find out more</p>
+                <p>Going away? Leave your pet at the petsitter’s home, where they’ll receive constant care and attention.</p>
             </div>
 
             <div class="service-card">
                 <h3>Walking the dog</h3>
                 <img src="../Public/img/dog-walking.svg" alt="dog walking">
-                <p>Find out more</p>
+                <p>No time for a walk? Schedule a walk with a petsitter and keep your dog happy and active!</p>
             </div>
         </div>
     </main>

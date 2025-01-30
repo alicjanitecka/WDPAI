@@ -74,7 +74,6 @@ public function updateUser($userId, $userData) {
             ':id' => $userId
         ]);
         if (!$result) {
-            // error_log("Update failed for user: " . $userId);
             throw new Exception('Update query failed');
         }
         return true;

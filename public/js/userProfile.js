@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Przełączanie zakładek
     const navButtons = document.querySelectorAll('.nav-btn');
     const contentSections = document.querySelectorAll('.content-section');
 
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Ustawienie domyślnej zakładki
     const defaultTab = 'personal-information';
     showSection(defaultTab);
     navButtons.forEach(btn => {
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Obsługa przycisku edycji
     const editBtn = document.querySelector('.edit-btn');
     const saveBtn = document.querySelector('.save-btn');
     const cancelBtn = document.querySelector('.cancel-btn');

@@ -20,16 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const petCard = this.closest('.pet-card');
             const petId = petCard.dataset.petId;
             
-            // Select the corresponding edit form using data-pet-id
             const editForm = document.querySelector(`.edit-pet-form[data-pet-id="${petId}"]`);
     
             if (editForm) {
-                editForm.style.display = 'block'; // Show the edit form
-                petCard.style.display = 'none'; // Hide the pet card
+                editForm.style.display = 'block'; 
+                petCard.style.display = 'none'; 
             }
         });
     });
-    // Obsługa usuwania zwierzęcia
+
     document.querySelectorAll('.delete-pet-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             if (confirm('Are you sure you want to delete this pet?')) {

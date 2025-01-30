@@ -28,7 +28,7 @@
                     </div>
                     <button type="submit">LOG IN</button>
                     <p>Don't have an account yet? <a href="/signup">Sign up</a></p>
-                    <!-- <a href="#">Fogrot password?</a> -->
+
                 </form>
 
             </div>

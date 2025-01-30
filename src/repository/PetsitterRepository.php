@@ -245,7 +245,6 @@ class PetsitterRepository extends Repository {
             ');
     
             foreach ($dates as $date) {
-                // Konwertuj $isAvailable na prawdziwy boolean dla PostgreSQL
                 $isAvailableBoolean = $isAvailable ? 'true' : 'false';
                 
                 if (!$stmt->execute([

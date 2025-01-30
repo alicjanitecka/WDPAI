@@ -12,7 +12,6 @@ class UserController extends AppController {
         $this->userRepository = new UserRepository();
     }
     public function updateUserProfile($userId, $data) {
-        // session_start();
         if(!$this->isPost() || !isset($_SESSION['user_id'])) {
             return $this->render('error', ['message' => 'Something went wrong']);
         }

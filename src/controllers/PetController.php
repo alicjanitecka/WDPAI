@@ -23,9 +23,9 @@ class PetController extends AppController {
         if ($this->isPost()) {
             $userId = $_SESSION['user_id'];
         
-            // Validate input data before creating a Pet object
+
             $name = $_POST['name'] ?? '';
-            $age = $_POST['age'] ?? 0; // Ensure age is set
+            $age = $_POST['age'] ?? 0;
             $species = $_POST['species'] ?? '';
             $breed = $_POST['breed'] ?? '';
             $additionalInfo = $_POST['additional_info'] ?? '';

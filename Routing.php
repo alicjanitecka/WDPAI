@@ -3,7 +3,7 @@
 
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/SecurityController.php';
-//  require_once 'src/controllers/BookingController.php';
+require_once 'src/controllers/VisitController.php';
  require_once 'src/controllers/PetController.php';
  require_once 'src/controllers/UserController.php';
  require_once 'src/controllers/PetsitterController.php';

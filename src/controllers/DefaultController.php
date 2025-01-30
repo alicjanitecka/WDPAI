@@ -21,10 +21,6 @@ class DefaultController extends AppController{
         $this->render('dashboard');
     }
 
-    // public function dashboard() {
-    //     $this->checkDashboard();
-    // }
-
     public function dashboard() {
         session_start();
         if (!isset($_SESSION['user_id'])) {

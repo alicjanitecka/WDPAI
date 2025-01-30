@@ -15,7 +15,6 @@ class SecurityController extends AppController {
 
     public function login()
     {   
-        // $user = new User('jsnow@pk.edu.pl', 'admin', 'Johnny', 'Snow');
         session_start();
 
         $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
@@ -24,11 +23,6 @@ class SecurityController extends AppController {
         if (!$this->isPost()) {
             return $this->render('login', ['messages' => $messages]);
         }
-
-
-        // if (!$this->isPost()) {
-        //     return $this->render('login');
-        // }
 
         $email = $_POST['email'];
         $password = $_POST['password'];

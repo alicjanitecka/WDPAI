@@ -156,7 +156,6 @@
             <?php if ($isPetsitter): ?>
                 <div class="content-section services-info" data-tab="services">
                     <h2>YOUR SERVICES</h2>
-                    <!-- <form action="/updatePetsitterServices" method="POST"> -->
 
                     <h3>Availability</h3>
                         <div class="availability-section">

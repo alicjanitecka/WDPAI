@@ -17,8 +17,6 @@ Routing::get('signup', 'SecurityController');
 Routing::get('logout', 'SecurityController');
 Routing::get('manageAccount', 'AccountController');
 Routing::get('becomePetsitter', 'PetsitterController');
-// Routing::get('search', 'SearchController');
-
 
 Routing::post('becomePetsitter', 'PetsitterController');
 Routing::post('login', 'SecurityController');
@@ -31,5 +29,7 @@ Routing::post('updateAccount', 'AccountController');
 Routing::post('updatePetsitterServices', 'PetsitterController');
 Routing::post('updateAvailability', 'PetsitterController');
 Routing::post('search', 'SearchController');
+Routing::post('book', 'VisitController');
+
 
 Routing::run($path);

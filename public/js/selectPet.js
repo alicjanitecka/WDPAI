@@ -7,10 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
         options.style.display = options.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Zmiana obsługi kliknięcia - tylko dla checkboxów
     document.querySelectorAll('.pet-option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', function(e) {
-            e.stopPropagation(); // Zatrzymaj propagację wydarzenia
+            e.stopPropagation(); 
             const optionElement = this.closest('.pet-option');
             optionElement.classList.toggle('selected');
             
