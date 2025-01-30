@@ -1,10 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../repository/VisitRepository.php';
+require_once __DIR__ . '/../repository/UserRepository.php';
+require_once __DIR__ . '/../repository/PetsitterRepository.php';
 
 class VisitController extends AppController {
     private $visitRepository;
-
+    private $userRepository;
+    private $petsitterRepository;
     public function __construct() {
         parent::__construct();
         parent::__construct();
@@ -12,7 +15,54 @@ class VisitController extends AppController {
             session_start();
         }
         $this->visitRepository = new VisitRepository();
+        $this->userRepository = new UserRepository();
+        $this->petsitterRepository = new PetsitterRepository();
     }
+    public function myVisits() {
+        $userId = $_SESSION['user_id'];
+        $isPetsitter = $this->petsitterRepository->isPetsitter($userId);
+        
+        if ($isPetsitter) {
+            $visits = $this->visitRepository->getVisitsByPetsitterId($userId);
+        } else {
+            $visits = $this->visitRepository->getVisitsByUserId($userId);
+        }
+        
+        $this->render('myVisits', [
+            'visits' => $visits,
+            'isPetsitter' => $isPetsitter
+        ]);
+    }
+    
+    public function confirmVisit() {
+        if (!$this->isAjax()) {
+            return;
+        }
+    
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $this->visitRepository->updateVisitStatus($data['visit_id'], true, false);
+            echo json_encode(['success' => true]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    
+    public function cancelVisit() {
+        if (!$this->isAjax()) {
+            return;
+        }
+    
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $this->visitRepository->updateVisitStatus($data['visit_id'], false, true);
+            echo json_encode(['success' => true]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    
 
     public function book() {
         header('Content-Type: application/json');

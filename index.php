@@ -17,7 +17,10 @@ Routing::get('signup', 'SecurityController');
 Routing::get('logout', 'SecurityController');
 Routing::get('manageAccount', 'AccountController');
 Routing::get('becomePetsitter', 'PetsitterController');
+Routing::get('myVisits', 'VisitController');
 
+Routing::post('confirmVisit', 'VisitController');
+Routing::post('cancelVisit', 'VisitController');
 Routing::post('becomePetsitter', 'PetsitterController');
 Routing::post('login', 'SecurityController');
 Routing::post('signup', 'SecurityController');

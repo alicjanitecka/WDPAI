@@ -1,0 +1,168 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;600;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Jura', sans-serif;
+    background: #7073BB; 
+    padding-top: 200px;
+}
+
+h1 {
+    text-align: center;
+    color: #3F3F3F;
+    margin-bottom: 2rem;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 95%;
+    z-index: 1000;
+}
+
+.logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo img {
+    height: 150px;
+    flex-shrink: 0; 
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem; 
+    margin-left: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3F3F3F;
+    text-decoration: none; 
+    padding: 0.5rem 1rem;
+    border-radius: 25px; 
+    background: #B9B9D1; 
+    font-size: 1.2em;
+    transition: transform 0.2s ease; 
+}
+
+.nav-item:hover {
+    transform: scale(1.05);
+    background: rgba(217, 217, 217, 1);
+}
+
+.nav-item img {
+    width: 20px;
+    height: 20px;
+}
+
+.visits-container {
+    max-width: 1025px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.visit-card {
+    background: #B9B9D1;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.visit-date {
+    font-size: 1.2em;
+    color: #3F3F3F;
+}
+
+.visit-type {
+    background: #7073BB;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.owner-info {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.pets-info {
+    margin-top: 1rem;
+}
+
+.pet-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.pet-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.pet-item img {
+    width: 20px;
+    height: 20px;
+}
+
+.visit-actions, .visit-status {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.confirm-button, .cancel-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.confirm-button {
+    background: #4CAF50;
+    color: white;
+}
+
+.cancel-button {
+    background: #f44336;
+    color: white;
+}
+
+.status {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.confirmed {
+    background: #4CAF50;
+    color: white;
+}
+
+.status.canceled {
+    background: #f44336;
+    color: white;
+}

@@ -22,7 +22,7 @@
                 become a petsitter
             </a>
             <?php endif; ?>
-            <a href="#" class="nav-item">
+            <a href="/myVisits" class="nav-item">
                 <img src="../Public/img/calendar.svg" alt="">
                 my visits
             </a>
