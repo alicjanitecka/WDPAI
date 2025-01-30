@@ -283,4 +283,52 @@ SELECT date, is_available
             return [];
         }
     }
+    public function search(array $criteria): array 
+    {
+        try {
+
+            $careTypeColumn = '';
+            switch($criteria['care_type']) {
+                case 'petsitter_home':
+                    $careTypeColumn = 'care_at_petsitter_home';
+                    break;
+                case 'owner_home':
+                    $careTypeColumn = 'care_at_owner_home';
+                    break;
+                case 'dog_walking':
+                    $careTypeColumn = 'dog_walking';
+                    break;
+            }
+
+            $query = "SELECT DISTINCT p.id, p.hourly_rate, u.first_name, u.last_name 
+            FROM public.petsitter p
+            JOIN public.user u ON p.user_id = u.id
+            WHERE p." . $careTypeColumn . " = true
+            AND NOT EXISTS (
+                SELECT 1 
+                FROM public.petsitter_availability pa 
+                WHERE pa.petsitter_id = p.id 
+                AND pa.date BETWEEN :start_date AND :end_date 
+                AND pa.is_available = false
+            )
+            AND EXISTS (
+                SELECT 1 
+                FROM public.petsitter_availability pa 
+                WHERE pa.petsitter_id = p.id 
+                AND pa.date BETWEEN :start_date AND :end_date 
+                AND pa.is_available = true
+            )";
+
+            $stmt = $this->database->connect()->prepare($query);
+            
+            $stmt->bindValue(':start_date', $criteria['start_date']);
+            $stmt->bindValue(':end_date', $criteria['end_date']);
+            $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+    
 }

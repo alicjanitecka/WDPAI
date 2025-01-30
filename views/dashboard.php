@@ -3,10 +3,12 @@
 <head>
 
     <link rel="stylesheet" type="text/css" href="../Public/css/dashboard.css"/>
+    
     <title>PetZone - Dashboard</title>
 </head>
 <body>
-
+<script src="../public/js/selectPet.js"></script>
+<script src="../public/js/searchPetsitter.js"></script>
     <nav class="navbar">
 
         <div class="nav-links">
@@ -46,27 +48,47 @@
 
     <main>
 
-        <form action="/search" method="GET" class="search-bar">
+        <form action="/search" method="POST" class="search-bar" id="searchForm">
             <div class="search-item">
                 <img src="../Public/img/calendar.svg" alt="calendar">
                 <input type="date" name="start_date" placeholder="Start date" required>
                 <input type="date" name="end_date" placeholder="End date" required>
             </div>
             <div class="search-item">
-                <img src="../Public/img/home.svg" alt="home">
-                <div class="pet-checkboxes">
-                <?php foreach ($userPets as $pet): ?>
-                <label>
-                    <input type="checkbox" name="pets[]" value="<?= $pet->getId() ?>" >
-                    <?= $pet->getName() ?>
-                </label>
-                <?php endforeach; ?>
-                </div>
+        <img src="../Public/img/home.svg" alt="home">
+        <select name="care_type" required>
+            <option value="">Select care type</option>
+            <option value="petsitter_home">At petsitter's home</option>
+            <option value="owner_home">At owner's home</option>
+            <option value="dog_walking">Walking the dog</option>
+        </select>
+        
+    </div>
+    <div class="search-item">
+    <img src="../Public/img/pet.svg" alt="pet">
+    <div class="pet-select-wrapper">
+        <div class="pet-select-display">Select pets</div>
+        <div class="pet-options">
+            <?php foreach ($userPets as $pet): ?>
+            <div class="pet-option" data-value="<?= $pet->getId() ?>">
+                <input type="checkbox" name="pets[]" value="<?= $pet->getId() ?>">
+                <span><?= $pet->getName() ?></span>
             </div>
-            <button type="submit" class="search-button">
-                <img src="../Public/img/search.svg" alt="Search Icon" class="button-icon">
-            </button>
-        </form>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+
+    <button type="submit" class="search-button">
+        <img src="../Public/img/search.svg" alt="Search Icon" class="button-icon">
+    </button>
+</form>
+<div class="search-results" id="searchResults" style="display: none;">
+    <!-- Tu będą wyświetlane wyniki -->
+</div>
+
+
 
         <div class="services-container">
 
@@ -89,5 +111,6 @@
             </div>
         </div>
     </main>
+
 </body>
 </html>
