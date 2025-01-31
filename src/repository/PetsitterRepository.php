@@ -163,7 +163,8 @@ class PetsitterRepository extends Repository {
               JOIN public.user u ON p.user_id = u.id
               JOIN public.petsitter_availability pa ON p.id = pa.petsitter_id
               WHERE pa.date BETWEEN :start_date AND :end_date 
-              AND pa.is_available = true";
+              AND pa.is_available = true
+              AND is_time_available(p.id, :start_date::DATE)";
         if ($serviceType) {
             $query .= " AND p.$serviceType = true";
         }

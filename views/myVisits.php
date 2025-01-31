@@ -98,6 +98,18 @@
                 <?php endif; ?>
             </div>
 
+
+            <div class="visit-status">
+                <?php if($visit->getIsConfirmed()): ?>
+                    <span class="status confirmed">Visit is confirmed</span>
+                <?php elseif($visit->getIsCanceled()): ?>
+                    <span class="status canceled">Visit is canceled</span>
+                <?php else: ?>
+                    <span class="status pending">Visit is pending confirmation</span>
+                <?php endif; ?>
+            </div>
+
+
             <?php if($isPetsitter): ?>
                 <div class="visit-actions">
                     <?php if(!$visit->getIsConfirmed() && !$visit->getIsCanceled()): ?>
@@ -111,20 +123,15 @@
                         </button>
                     <?php endif; ?>
                 </div>
-            <?php else: ?>
-                <div class="visit-status">
-                    <?php if($visit->getIsConfirmed()): ?>
-                        <span class="status confirmed">Visit is confirmed</span>
-                    <?php endif; ?>
-                    <?php if($visit->getIsCanceled()): ?>
-                        <span class="status canceled">Visit is canceled</span>
                     <?php else: ?>
-                        <button onclick="cancelVisit(<?= $visit->getId() ?>)" class="cancel-button">
-                            Cancel
-                        </button>
+                        <div class="visit-actions">
+                            <?php if(!$visit->getIsCanceled() && !$visit->getIsConfirmed()): ?>
+                                <button onclick="cancelVisit(<?= $visit->getId() ?>)" class="cancel-button">
+                                    Cancel
+                                </button>
+                            <?php endif; ?>
+                        </div>
                     <?php endif; ?>
-                </div>
-            <?php endif; ?>
         </div>
     <?php endforeach; ?>
 </div>

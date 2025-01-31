@@ -60,7 +60,7 @@ class PetsitterController extends AppController {
         $result = $this->petsitterRepository->updatePetsitter($_SESSION['user_id'], $_POST);
         
         if ($result) {
-            header('Location: /account');
+            header('Location: /manageAccount');
         } else {
             return $this->render('error', ['message' => 'Update failed']);
         }

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const editBtn = document.querySelector('.edit-btn');
     const saveBtn = document.querySelector('.save-btn');
     const cancelBtn = document.querySelector('.cancel-btn');
-    const inputs = document.querySelectorAll('.form-left input, .form-right textarea');
+    const inputs = document.querySelectorAll('.form-left input,.form-right input, .form-left textarea, .form-right textarea');
 
     console.log('Edit button:', editBtn);
     console.log('Save button:', saveBtn);
@@ -60,4 +60,5 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log('One or more buttons not found');
     }
+
 });

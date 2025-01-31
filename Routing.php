@@ -7,7 +7,6 @@ require_once 'src/controllers/VisitController.php';
  require_once 'src/controllers/PetController.php';
  require_once 'src/controllers/UserController.php';
  require_once 'src/controllers/PetsitterController.php';
- require_once 'src/controllers/AccountController.php';
  require_once 'src/controllers/SearchController.php';
 class Routing{
     public static $routes;

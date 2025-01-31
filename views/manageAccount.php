@@ -46,7 +46,7 @@
                 <?php if ($isPetsitter): ?>
                     <button class="nav-btn">services</button>
                 <?php endif; ?>
-                <button class="nav-btn">settings</button>
+
             </nav>
         </div>
 
@@ -55,35 +55,32 @@
 
                 <h2>MANAGE YOUR PROFILE</h2>
                 <div class="profile-form">
-                    <form action="/updateAccount" method="POST">
+                    <form action="/updateAccount" method="POST" >
                         <div class="form-container">
                             <div class="form-left">
                                 <input type="text" name="first_name" value="<?= $user->getFirstName() ?>" placeholder="first name" <?= $isPetsitter ? 'required' : '' ?>readonly>
                                 <input type="text" name="last_name" value="<?= $user->getLastName() ?>" placeholder="last name" <?= $isPetsitter ? 'required' : '' ?>readonly>
                                 <input type="email" name="email" value="<?= $user->getEmail() ?>" placeholder="email address" <?= $isPetsitter ? 'required' : '' ?>readonly>
                                 <input type="tel" name="phone" value="<?= $user->getPhone() ?>" placeholder="phone number" <?= $isPetsitter ? 'required' : '' ?>readonly>
-                                <input type="text" name="city" value="<?= $user->getCity() ?>" placeholder="city" <?= $isPetsitter ? 'required' : '' ?>readonly>
-                                <input type="text" name="postal_code" value="<?= $user->getPostalCode() ?>" placeholder="postal code" <?= $isPetsitter ? 'required' : '' ?>readonly>
-                                <input type="text" name="street" value="<?= $user->getStreet() ?>" placeholder="street" <?= $isPetsitter ? 'required' : '' ?>readonly>
-                                <input type="text" name="house_number" value="<?= $user->getHouseNumber() ?>" placeholder="house number" <?= $isPetsitter ? 'required' : '' ?>readonly>
-                                <input type="text" name="apartment_number" value="<?= $user->getApartmentNumber() ?>" placeholder="apartment number" readonly>
-                            </div>
-
-
-                            <div class="form-right">
-                                <div class="photo-upload">
-                                    <img src="<?= $user->getAvatarUrl() ?? '../Public/img/default-avatar.svg' ?>" alt="User photo">
-                                    <button type="button" class="edit-photo-btn">Change photo</button>
-                                </div>
                                 <?php if ($isPetsitter): ?>
                                     <textarea name="description" placeholder="Description" required readonly><?= $petsitter->getDescription() ?></textarea>
                                 <?php endif; ?>
                             </div>
 
 
+                            <div class="form-right">
+                                <input type="text" name="city" value="<?= $user->getCity() ?>" placeholder="city" <?= $isPetsitter ? 'required' : '' ?>readonly>
+                                <input type="text" name="postal_code" value="<?= $user->getPostalCode() ?>" placeholder="postal code" <?= $isPetsitter ? 'required' : '' ?>readonly>
+                                <input type="text" name="street" value="<?= $user->getStreet() ?>" placeholder="street" <?= $isPetsitter ? 'required' : '' ?>readonly>
+                                <input type="text" name="house_number" value="<?= $user->getHouseNumber() ?>" placeholder="house number" <?= $isPetsitter ? 'required' : '' ?>readonly>
+                                <input type="text" name="apartment_number" value="<?= $user->getApartmentNumber() ?>" placeholder="apartment number" readonly>
+
+                            </div>
+
+
                         </div>
                         <div class="form-actions">
-                            <button type="button" class="edit-btn">Edit</button>
+                            <button type="button" class="edit-btn" >Edit</button>
                             <button type="submit" class="save-btn" style="display: none;">Save changes</button>
                             <button type="button" class="cancel-btn" style="display: none;">Cancel</button>
                         </div>
@@ -103,9 +100,7 @@
                                 <p>Breed: <?= $pet->getBreed() ?></p>
                                 <p>Additional info: <?= $pet->getAdditionalInfo() ?></p>
                             </div>
-                            <div class="pet-photo">
-                                <img src="<?= $pet->getPhotoUrl() ?? '../Public/img/default-pet.svg' ?>" alt="Pet photo">
-                            </div>
+
                             <div class="pet-actions">
                                 <button class="edit-pet-btn">Edit</button>
                                 <form id="deletePetForm-<?= $pet->getId() ?>" action="/deletePet" method="POST" style="display: inline;">
@@ -126,7 +121,6 @@
                                 </select>
                                 <input type="text" name="breed" value="<?= $pet->getBreed() ?>">
                                 <textarea name="additional_info"><?= htmlspecialchars($pet->getAdditionalInfo()) ?></textarea>
-                                <input type="file" name="photo" accept="image/*">
                                 <button type="submit">Save Changes</button>
                                 <button type="button" class="cancel-edit-pet">Cancel</button>
                             </form>
@@ -231,10 +225,7 @@
                 </div>
             <?php endif; ?>
 
-            <div class="content-section settings-info" data-tab="settings">
-                <h2>SETTINGS</h2>
-                <!-- Settings content -->
-            </div>
+
         </div>
     </main>
 

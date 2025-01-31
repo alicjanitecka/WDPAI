@@ -15,7 +15,7 @@ Routing::get('signup', 'DefaultController');
 Routing::get('login', 'SecurityController');
 Routing::get('signup', 'SecurityController');
 Routing::get('logout', 'SecurityController');
-Routing::get('manageAccount', 'AccountController');
+Routing::get('manageAccount', 'UserController');
 Routing::get('becomePetsitter', 'PetsitterController');
 Routing::get('myVisits', 'VisitController');
 
@@ -28,7 +28,7 @@ Routing::post('logout', 'SecurityController');
 Routing::post('updatePet', 'PetController');
 Routing::post('deletePet', 'PetController');
 Routing::post('addPet', 'PetController');
-Routing::post('updateAccount', 'AccountController');
+Routing::post('updateAccount', 'UserController');
 Routing::post('updatePetsitterServices', 'PetsitterController');
 Routing::post('updateAvailability', 'PetsitterController');
 Routing::post('search', 'SearchController');

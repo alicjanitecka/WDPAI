@@ -33,7 +33,7 @@ class SecurityController extends AppController {
         }
 
         if (!password_verify($password, $user->getPassword())) {
-            return $this->render('login', ['messages' => ['Wrong password!']]);
+            return $this->render('login', ['messages' => ['Wrong email or password!']]);
         }
 
         $_SESSION['user_id'] = $user->getId();

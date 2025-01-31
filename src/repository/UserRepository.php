@@ -30,7 +30,6 @@ class UserRepository extends Repository {
         $user['street'],
         $user['house_number'],
         $user['apartment_number'],
-            $user['avatar_url']
         );
     }
 
@@ -73,10 +72,10 @@ public function updateUser($userId, $userData) {
             ':apartment_number' => $userData['apartment_number'],
             ':id' => $userId
         ]);
-        if (!$result) {
-            throw new Exception('Update query failed');
-        }
-        // return true;
+        // if (!$result) {
+        //     throw new Exception('Update query failed');
+        // }
+        //  return true;
     } catch (PDOException $e) {
         throw new Exception('Database error: ' . $e->getMessage());
     }
@@ -136,11 +135,11 @@ public function getUserById($id) {
             $user['street'],
             $user['house_number'],
             $user['apartment_number'],
-            $user['avatar_url']
         );
     } catch (PDOException $e) {
         return null;
     }
 }
+
 
 }

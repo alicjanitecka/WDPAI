@@ -5,17 +5,31 @@ class VisitRepository extends Repository
 {
     public function createVisit(array $visitData): void
     {
+        $connection = $this->database->connect();
+    
         try {
-            error_log('Creating visit with data: ' . print_r($visitData, true));
+
+            $connection->beginTransaction();
+
+            $stmt = $connection->prepare('
+                SELECT is_time_available(:petsitter_id, :start_date::DATE)
+            ');
+            $stmt->execute([
+                ':petsitter_id' => $visitData['petsitter_id'],
+                ':start_date' => $visitData['start_date']
+            ]);
             
-            $stmt = $this->database->connect()->prepare('
+            if (!$stmt->fetchColumn()) {
+                throw new Exception('Petsitter is not available at this time');
+            }
+
+            $stmt = $connection->prepare('
                 INSERT INTO public.visit 
                 (user_id, petsitter_id, care_type, start_date, end_date, pets)
                 VALUES (?, ?, ?, ?, ?, ?)
             ');
     
             $petsArray = '{' . implode(',', $visitData['pets']) . '}';
-            error_log('Prepared pets array: ' . $petsArray);
     
             $stmt->execute([
                 $visitData['user_id'],
@@ -26,8 +40,10 @@ class VisitRepository extends Repository
                 $petsArray
             ]);
     
-        } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
+
+            $connection->commit();
+        } catch (Exception $e) {
+            $connection->rollBack();
             throw new Exception('Error creating visit: ' . $e->getMessage());
         }
     }
