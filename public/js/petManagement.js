@@ -31,11 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.delete-pet-btn').forEach(btn => {
         btn.addEventListener('click', function() {
+            const petId = this.getAttribute('data-pet-id');
             if (confirm('Are you sure you want to delete this pet?')) {
-                const petCard = this.closest('.pet-card');
-                const petId = petCard.dataset.petId;
-                // Tutaj możesz dodać kod do wysłania żądania usunięcia do serwera
-                petCard.remove(); // Usuwa kartę zwierzęcia z DOM
+                const form = document.getElementById('deletePetForm-' + petId);
+                if (form) {
+                    form.submit();
+                } else {
+                    console.error('Form not found for pet ID: ' + petId);
+                }
             }
         });
     });

@@ -39,7 +39,7 @@ class DefaultController extends AppController{
             'userPets' => $userPets
         ]);
     }
-
+//spr
     public function signup() {
         $this->render('signup');
     }

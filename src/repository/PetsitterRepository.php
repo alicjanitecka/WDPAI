@@ -55,6 +55,7 @@ class PetsitterRepository extends Repository {
     error_log("User $userId is petsitter: " . ($result ? 'true' : 'false'));
     return $result;
     }
+    
     public function getPetsitterServices($userId) {
         $stmt = $this->database->connect()->prepare('
             SELECT is_dog_sitter, is_cat_sitter, is_rodent_sitter, care_at_owner_home, care_at_petsitter_home, dog_walking, hourly_rate

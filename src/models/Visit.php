@@ -39,6 +39,10 @@ class Visit {
         $this->ownerPhone = $visitData['owner_phone'] ?? '';
         $this->ownerAddress = $visitData['owner_address'] ?? '';
         $this->petNames = $visitData['pet_names'] ?? [];
+        $this->petsitterFirstName = $visitData['petsitter_first_name'] ?? '';
+        $this->petsitterLastName = $visitData['petsitter_last_name'] ?? '';
+        $this->petsitterPhone = $visitData['petsitter_phone'] ?? '';
+        $this->petsitterAddress = $visitData['petsitter_address'] ?? '';
     }
 
     public function getId() {
@@ -92,8 +96,11 @@ class Visit {
     public function getOwnerAddress() {
         return $this->ownerAddress;
     }
-    public function getPetsitterFullName(): string {
-        return $this->petsitterFirstName . ' ' . $this->petsitterLastName;
+    public function getPetsitterFirstName() {
+        return $this->petsitterFirstName;
+    }
+    public function getPetsitterLastName() {
+        return $this->petsitterLastName;
     }
     
     public function getPetsitterPhone(): ?string {

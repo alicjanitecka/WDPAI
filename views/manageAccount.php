@@ -21,7 +21,7 @@
                 <img src="../Public/img/home.svg" alt="">
                 home
             </a>
-            <a href="#" class="nav-item">
+            <a href="/myVisits" class="nav-item">
                 <img src="../Public/img/calendar.svg" alt="">
                 my visits
             </a>
@@ -108,9 +108,9 @@
                             </div>
                             <div class="pet-actions">
                                 <button class="edit-pet-btn">Edit</button>
-                                <form action="/deletePet" method="POST" style="display: inline;">
+                                <form id="deletePetForm-<?= $pet->getId() ?>" action="/deletePet" method="POST" style="display: inline;">
                                     <input type="hidden" name="id" value="<?= $pet->getId() ?>">
-                                    <button type="submit" class="delete-pet-btn">Delete</button>
+                                    <button type="button" class="delete-pet-btn" data-pet-id="<?= $pet->getId() ?>">Delete</button>
                                 </form>
                             </div>
                         </div>

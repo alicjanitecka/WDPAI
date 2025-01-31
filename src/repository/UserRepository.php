@@ -76,7 +76,7 @@ public function updateUser($userId, $userData) {
         if (!$result) {
             throw new Exception('Update query failed');
         }
-        return true;
+        // return true;
     } catch (PDOException $e) {
         throw new Exception('Database error: ' . $e->getMessage());
     }

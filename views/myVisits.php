@@ -72,7 +72,8 @@
             <?php if(!$isPetsitter): ?>
                 <div class="petsitter-info">
                     <strong>Petsitter:</strong>
-                    <p><?= $visit->getPetsitterFullName() ?></p>
+                    <p><?= $visit->getPetsitterFirstName() ?></p>
+                    <p><?= $visit->getPetsitterLastName() ?></p>
                     <p>Phone: <?= $visit->getPetsitterPhone() ?></p>
                     <?php if($visit->getCareType() === 'petsitter_home' && $visit->getIsConfirmed()): ?>
                         <p>Address: <?= $visit->getPetsitterAddress() ?></p>
@@ -113,10 +114,10 @@
             <?php else: ?>
                 <div class="visit-status">
                     <?php if($visit->getIsConfirmed()): ?>
-                        <span class="status confirmed">Confirmed</span>
+                        <span class="status confirmed">Visit is confirmed</span>
                     <?php endif; ?>
                     <?php if($visit->getIsCanceled()): ?>
-                        <span class="status canceled">Canceled</span>
+                        <span class="status canceled">Visit is canceled</span>
                     <?php else: ?>
                         <button onclick="cancelVisit(<?= $visit->getId() ?>)" class="cancel-button">
                             Cancel

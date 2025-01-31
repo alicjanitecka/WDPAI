@@ -26,7 +26,7 @@ class PetController extends AppController {
 
             $name = $_POST['name'] ?? '';
             $age = $_POST['age'] ?? 0;
-            $species = $_POST['species'] ?? '';
+            $petType = $_POST['pet_type'] ?? '';
             $breed = $_POST['breed'] ?? '';
             $additionalInfo = $_POST['additional_info'] ?? '';
     
@@ -35,7 +35,7 @@ class PetController extends AppController {
                 $userId,
                 $name,
                 $age,
-                $species,
+                $petType,
                 $breed,
                 $additionalInfo
             );
