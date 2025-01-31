@@ -15,6 +15,14 @@ class PetsitterController extends AppController {
         return $this->petsitterRepository->isPetsitter($userId);
     }
     public function becomePetsitter() {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+        
         if (!$this->isPost()) {
             return $this->render('becomeAPetsitter');
         }
@@ -43,7 +51,7 @@ class PetsitterController extends AppController {
         $petsitterResult = $this->petsitterRepository->createPetsitter($userId, $description);
     
         if ($userUpdateResult && $petsitterResult) {
-            header("Location: /dashboardPetsitter");
+            header("Location: /dashboard");
             exit();
         } else {
             return $this->render('becomePetsitter', ['messages' => ['Registration failed. Please try again.']]);

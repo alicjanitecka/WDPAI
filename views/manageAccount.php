@@ -140,7 +140,6 @@
                     </select>
                     <input type="text" name="breed" placeholder="Breed">
                     <textarea name="additional_info" placeholder="Additional Info"></textarea>
-                    <input type="file" name="photo" accept="image/*">
                     <button type="submit">Save Pet</button>
                     <button type="button" id="cancel-add-pet">Cancel</button>
                     </form>

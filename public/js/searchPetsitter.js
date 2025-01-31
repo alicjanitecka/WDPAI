@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     html += `
                         <div class="petsitter-card">
                             <div class="petsitter-info">
-                                <img src="${petsitter.avatar || '../Public/img/default-avatar.svg'}" alt="Avatar">
                                 <div class="petsitter-details">
                                     <h3>${petsitter.first_name} ${petsitter.last_name}</h3>
                                     <p>${petsitter.location || 'Location not specified'}</p>

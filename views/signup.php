@@ -18,8 +18,8 @@
                         ?>                  
                     </div>
                     <div class="name-row">
-                        <input name="name" type="text" placeholder="First name">
-                        <input name="surname" type="text" placeholder="Last name">
+                        <input name="first_name" type="text" placeholder="First name">
+                        <input name="last_name" type="text" placeholder="Last name">
                     </div>
                     <input name="email" type="email" placeholder="E-mail address">
                     <input name="password" type="password" placeholder="Password">
