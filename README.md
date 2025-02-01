@@ -9,7 +9,7 @@ A web application that connects pet owners with professional petsitters. The pla
 
 - User login
   
-![Screenshot of login page](./public/img/screenshots/login.png)
+![Screenshot of login page](./public/img/screenshots/login1.png)
 - Advanced petsitter search
   
 ![Screenshot of login page](./public/img/screenshots/search.png)
