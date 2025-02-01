@@ -166,3 +166,109 @@ h1 {
     background: #f44336;
     color: white;
 }
+.page-title {
+    text-align: center;
+    color: #3F3F3F;
+    margin-bottom: 2rem;
+    background: #B9B9D1;
+    padding: 1rem;
+    border-radius: 15px;
+    max-width: 990px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 50px;
+        padding-bottom: 60px; /* Miejsce na pasek nawigacyjny na dole */
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+    }
+
+    .logo {
+        position: static;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 1001;
+    }
+
+    .logo img {
+        height: 80px;
+        margin: 10px 0;
+    }
+
+    .nav-links {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #B9B9D1;
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5rem;
+        z-index: 1000;
+    }
+
+    .nav-item {
+        font-size: 0;
+        padding: 0.5rem;
+        background: none;
+    }
+
+    .nav-item img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .visits-container, .manage-visits-container {
+        padding: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 4rem; /* Dodatkowe miejsce na dole dla paska nawigacyjnego */
+    }
+
+    .visit-card {
+        padding: 1rem;
+    }
+
+    .visit-actions, .visit-status {
+        flex-direction: column;
+    }
+
+    .confirm-button, .cancel-button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding-top: 80px;
+    }
+
+    .logo img {
+        height: 60px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .visit-date, .visit-type {
+        font-size: 1em;
+    }
+
+    .pet-item {
+        font-size: 0.9em;
+    }
+
+    .confirm-button, .cancel-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9em;
+    }
+}

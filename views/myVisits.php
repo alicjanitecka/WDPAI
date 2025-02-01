@@ -42,7 +42,8 @@
     </div>
 
     <main>
-        <h1>MANAGE YOUR VISITS</h1>
+    <h1 class="page-title">Manage Your Visits</h1>
+
         <div class="visits-container">
             <?php foreach($visits as $visit): ?>
                 <div class="visit-card">

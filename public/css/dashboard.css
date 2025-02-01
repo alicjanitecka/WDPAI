@@ -5,7 +5,7 @@ body {
     padding: 0;
     font-family: 'Jura', sans-serif;
     background: #7073BB; 
-    padding-top: 200px;
+    padding-top: 140px;
 }
 
 .navbar {
@@ -69,7 +69,8 @@ body {
     padding: 1rem;
     max-width: 1025px; 
     border-radius: 25px;
-    background: #B9B9D1;    
+    background: #B9B9D1;
+        
 }
 
 .search-button {
@@ -92,7 +93,26 @@ body {
     gap: 0.5rem;
     flex: 1;
     border-radius: 20px;
+    
 }
+
+
+.pet-select-display {
+    padding: 0.8rem 0.5rem;
+    border: none;
+    border-radius: 10px;
+    background: #D9D9D9;  
+    color: #000000;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%233F3F3F" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+}
+
+
 
 .search-item input,
 .search-item select {
@@ -116,8 +136,8 @@ body {
 }
 
 .search-item img {
-    width: 35px;  
-    height: 35px; 
+    width: 30px;  
+    height: 30px; 
 }
 
 
@@ -169,20 +189,7 @@ body {
     width: 100%;
 }
 
-.pet-select-display {
-    padding: 0.8rem 0.5rem;
-    border: none;
-    border-radius: 10px;
-    background: #D9D9D9;  
-    color: #3F3F3F;
-    font-size: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    cursor: pointer;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%233F3F3F" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-}
+
 
 .pet-options {
     display: none;
@@ -390,8 +397,8 @@ body {
         display: none;
     }
     .search-item img{
-        width: 25px;  
-    height:25px; 
+        width: 20px;  
+    height:20px; 
     }
     .petsitter-card {
         padding: 0.6rem;

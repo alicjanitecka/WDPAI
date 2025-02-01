@@ -154,3 +154,83 @@ button:active {
         font-size: 1em;
     }
 }
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .container {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .left, .right {
+        flex: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .right {
+        order: -1;
+        padding: 0.8em 0;
+    }
+
+    .left {
+        padding: 0.9em;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .right img {
+        max-width: 30%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 1.8em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    form {
+        padding: 1em;
+        width: 90%;
+        max-width: none;
+    }
+
+    form > input, form > textarea {
+        font-size: 0.9em;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 0 1em 0;
+        padding: 0.7em;
+    }
+
+    form > textarea {
+        height: 80px;
+    }
+
+    button {
+        font-size: 1em;
+        margin: 1em 0;
+        width: 100%;
+    }
+
+    form label {
+        font-size: 0.9em;
+        margin-left: 0;
+    }
+
+    form p, form a {
+        font-size: 0.9em;
+    }
+
+    form input[type="checkbox"] {
+        margin-left: 0;
+    }
+}
+

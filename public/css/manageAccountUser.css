@@ -575,3 +575,124 @@ textarea {
     color: #3F3F3F;
     width: 100px;
 }
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 100px; 
+        padding-bottom: 60px;
+      }
+
+    .logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 1001;
+    }
+
+    .logo img {
+        height: 80px; /* Dostosuj wysokość logo */
+        margin: 10px 0;
+    }
+
+    main {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        width: 100%;
+        background: #B9B9D1;
+        padding: 0.5rem;
+        z-index: 1000;
+    }
+
+    .nav-links {
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .nav-item {
+        flex-direction: column;
+        font-size: 0;
+        padding: 0.5rem;
+    }
+
+    .nav-item img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .profile-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: calc(50% - 5px);
+    }
+
+    .profile-content {
+        padding: 1rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-left, .form-right {
+        width: 100%;
+    }
+
+    .pet-card {
+        flex-direction: column;
+    }
+
+    .pet-actions {
+        position: static;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    .date-range {
+        flex-direction: column;
+    }
+
+    .availability-status {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo img {
+        height: 80px;
+    }
+
+    .nav-item img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-btn {
+        width: 100%;
+    }
+
+    .edit-btn, .delete-btn, .save-edit-btn, .cancel-edit-btn, .save-services-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
