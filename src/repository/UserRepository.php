@@ -72,10 +72,7 @@ public function updateUser($userId, $userData) {
             ':apartment_number' => $userData['apartment_number'],
             ':id' => $userId
         ]);
-        // if (!$result) {
-        //     throw new Exception('Update query failed');
-        // }
-        //  return true;
+
     } catch (PDOException $e) {
         throw new Exception('Database error: ' . $e->getMessage());
     }

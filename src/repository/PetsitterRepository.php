@@ -157,38 +157,6 @@ class PetsitterRepository extends Repository {
         }
     }
     
-    public function searchPetsitters($startDate, $endDate, $serviceType, $petTypes, $page, $perPage) {
-        $offset = ($page - 1) * $perPage;
-        $query = "SELECT DISTINCT p.*, u.first_name, u.last_name, u.city FROM public.petsitter p
-              JOIN public.user u ON p.user_id = u.id
-              JOIN public.petsitter_availability pa ON p.id = pa.petsitter_id
-              WHERE pa.date BETWEEN :start_date AND :end_date 
-              AND pa.is_available = true
-              AND is_time_available(p.id, :start_date::DATE)";
-        if ($serviceType) {
-            $query .= " AND p.$serviceType = true";
-        }
-        
-        if (!empty($petTypes)) {
-            $petTypeConditions = [];
-            foreach ($petTypes as $type) {
-                $petTypeConditions[] = "p.is_{$type}_sitter = true";
-            }
-            $query .= " AND (" . implode(' OR ', $petTypeConditions) . ")";
-        }
-        
-        $query .= " LIMIT :limit OFFSET :offset";
-        
-        $stmt = $this->database->connect()->prepare($query);
-        $stmt->bindValue(':start_date', $startDate, PDO::PARAM_STR);
-        $stmt->bindValue(':end_date', $endDate, PDO::PARAM_STR);
-        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    }
     
     public function countSearchResults($startDate, $endDate, $serviceType, $petIds) {
         $query = "SELECT COUNT(*) FROM public.petsitter p

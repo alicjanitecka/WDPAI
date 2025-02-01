@@ -17,8 +17,11 @@ class DefaultController extends AppController{
 
     }
 
-    public function index(){
-        $this->render('dashboard');
+    public function index() {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            return $this->render('login');
+        }
     }
 
     public function dashboard() {
@@ -39,7 +42,7 @@ class DefaultController extends AppController{
             'userPets' => $userPets
         ]);
     }
-//spr
+    
     public function signup() {
         $this->render('signup');
     }

@@ -21,6 +21,9 @@ class Routing{
 
 
     public static function run($url){
+        if ($url === '') {
+            $url = 'dashboard';
+        }
         $segments = explode("/", $url);
         $action = $segments[0];  // Pierwsza część URL to akcja
         if(!array_key_exists($action, self::$routes)){
