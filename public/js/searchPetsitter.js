@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="petsitter-info">
                                 <div class="petsitter-details">
                                     <h3>${petsitter.first_name} ${petsitter.last_name}</h3>
-                                    <p>${petsitter.location || 'Location not specified'}</p>
+                                    <p>${petsitter.city || 'Location not specified'}</p>
                                     <p>Price: $${petsitter.hourly_rate || '0'}/hour</p>
                                 </div>
                             </div>
@@ -56,37 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-
-
-
-        
-
-        function displayResults(data) {
-            if (data.length === 0) {
-                searchResults.innerHTML = '<p>No petsitters found</p>';
-            } else {
-                let html = '';
-                data.forEach(function(petsitter) {
-                    html += `
-                        <div class="petsitter-card">
-                            <div class="petsitter-info">
-                                <img src="${petsitter.avatar || '../Public/img/default-avatar.svg'}" alt="Avatar">
-                                <div class="petsitter-details">
-                                    <h3>${petsitter.first_name} ${petsitter.last_name}</h3>
-                                    <p>${petsitter.location || 'Location not specified'}</p>
-                                    <p>Price: $${petsitter.price || '0'}/hour</p>
-                                </div>
-                            </div>
-                            <button class="book-button" onclick="bookPetsitter(${petsitter.id})">Book</button>
-                        </div>
-                    `;
-                });
-                searchResults.innerHTML = html;
-            }
-            searchResults.style.display = 'block';
-        }
-        
+      
         window.bookPetsitter = function(petsitterId) {
             const requestData = {
                 petsitter_id: parseInt(petsitterId),

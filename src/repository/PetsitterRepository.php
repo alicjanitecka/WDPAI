@@ -159,7 +159,7 @@ class PetsitterRepository extends Repository {
     
     public function searchPetsitters($startDate, $endDate, $serviceType, $petTypes, $page, $perPage) {
         $offset = ($page - 1) * $perPage;
-        $query = "SELECT DISTINCT p.*, u.first_name, u.last_name FROM public.petsitter p
+        $query = "SELECT DISTINCT p.*, u.first_name, u.last_name, u.city FROM public.petsitter p
               JOIN public.user u ON p.user_id = u.id
               JOIN public.petsitter_availability pa ON p.id = pa.petsitter_id
               WHERE pa.date BETWEEN :start_date AND :end_date 
@@ -266,7 +266,7 @@ class PetsitterRepository extends Repository {
     public function getPetsitterAvailability($petsitterId) {
         try {
             $stmt = $this->database->connect()->prepare('
-SELECT date, is_available 
+            SELECT date, is_available 
             FROM public.petsitter_availability 
             WHERE petsitter_id = :petsitter_id 
             AND is_available = true
@@ -301,7 +301,7 @@ SELECT date, is_available
                     break;
             }
 
-            $query = "SELECT DISTINCT p.id, p.hourly_rate, u.first_name, u.last_name 
+            $query = "SELECT DISTINCT p.id, p.hourly_rate, u.first_name, u.last_name, u.city 
             FROM public.petsitter p
             JOIN public.user u ON p.user_id = u.id
             WHERE p." . $careTypeColumn . " = true

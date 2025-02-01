@@ -112,38 +112,55 @@
                         <div class="edit-pet-form" style="display: none;" data-pet-id="<?= $pet->getId() ?>">
                             <form action="/updatePet" method="POST">
                                 <input type="hidden" name="id" value="<?= $pet->getId() ?>">
+                                <div class="form-container">
+                                <div class="form-left">
                                 <input type="text" name="name" value="<?= $pet->getName() ?>" required>
                                 <input type="number" name="age" value="<?= $pet->getAge() ?>" required>
+                                </div>
+                                <div class="form-right">
                                 <select name="pet_type" required>
                                     <option value="dog">Dog</option>
                                     <option value="cat">Cat</option>
                                     <option value="rodent">Rodent</option>
                                 </select>
                                 <input type="text" name="breed" value="<?= $pet->getBreed() ?>">
+                                </div>
+                                </div>
                                 <textarea name="additional_info"><?= htmlspecialchars($pet->getAdditionalInfo()) ?></textarea>
-                                <button type="submit">Save Changes</button>
-                                <button type="button" class="cancel-edit-pet">Cancel</button>
+                                <div class="edit-actions">
+                                <button type="submit" class="save-edit-btn">Save Changes</button>
+                                <button type="button" class="cancel-edit-btn">Cancel</button>
+                                </div>
                             </form>
                         </div>
 
                     <?php endforeach; ?>
                 </div>
-                <button id="add-pet-btn">Add Pet</button>
-                <div id="add-pet-form" style="display: none;">
+                <button class="add-pet-btn" id="add-pet-btn">Add Pet</button>
+                <div class="add-pet-form" id="add-pet-form" style="display: none;">
                     <form action="/addPet" method="POST">
-                    <input type="text" name="name" placeholder="Pet Name" required>
-                    <input type="number" name="age" placeholder="Age" required>
-                    <select name="pet_type" required>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                        <option value="rodent">Rodent</option>
-                    </select>
-                    <input type="text" name="breed" placeholder="Breed">
-                    <textarea name="additional_info" placeholder="Additional Info"></textarea>
-                    <button type="submit">Save Pet</button>
-                    <button type="button" id="cancel-add-pet">Cancel</button>
+                        <div class="form-container">
+                            <div class="form-left">
+                                <input type="text" name="name" placeholder="Pet Name" required>
+                                <input type="number" name="age" placeholder="Age" required>
+                            </div>
+                            <div class="form-right">
+                                <select name="pet_type" required>
+                                    <option value="dog">Dog</option>
+                                    <option value="cat">Cat</option>
+                                    <option value="rodent">Rodent</option>
+                                </select>
+                                <input type="text" name="breed" placeholder="Breed">
+                            </div>
+                        </div>
+                        <textarea name="additional_info" placeholder="Additional Info"></textarea>
+                        <div class="add-pet-actions">
+                            <button type="submit" class="save-btn">Save Pet</button>
+                            <button type="button" class="cancel-btn cancel-add-pet">Cancel</button>
+                        </div>
                     </form>
                 </div>
+
             </div>
 
             <?php if ($isPetsitter): ?>
@@ -154,8 +171,8 @@
                         <div class="availability-section">
                             <form action="/updateAvailability" method="POST">
                                 <div class="date-range">
-                                    <label>From: <input type="date" name="start_date" required></label>
-                                    <label>To: <input type="date" name="end_date" required></label>
+                                    <label>From: <input type="date" name="start_date" class="date-input" required></label>
+                                    <label>To: <input type="date" name="end_date" class="date-input" required></label>
                                 </div>
                                 <div class="availability-status">
                                     <label>
@@ -165,7 +182,7 @@
                                         <input type="radio" name="is_available" value="0"> Unavailable
                                     </label>
                                 </div>
-                                <button type="submit">Update Availability</button>
+                                <button type="submit" class="update-btn">Update Availability</button>
                             </form>
                         </div>
                         <div class="availability-calendar">
@@ -216,10 +233,10 @@
                         <label><input type="checkbox" name="services[]" value="care_at_owner_home" <?= $petsitterServices['services']['care_at_owner_home'] ? 'checked' : '' ?>> Care at owner's home</label>
                         <label><input type="checkbox" name="services[]" value="care_at_petsitter_home" <?= $petsitterServices['services']['care_at_petsitter_home'] ? 'checked' : '' ?>> Care at petsitter's home</label>
                         <label><input type="checkbox" name="services[]" value="dog_walking" <?= $petsitterServices['services']['dog_walking'] ? 'checked' : '' ?>> Dog walking</label>
-                        <h3>Hourly Rate</h3>
-                        <input type="number" name="hourly_rate" value="<?= $petsitterServices['hourly_rate'] ?>" step="0.01" min="0">
-
-                        <button type="submit">Save Services</button>
+                        <div class="rate-input">
+                <label>Hourly Rate: <input type="number" name="hourly_rate" class="rate-field" min="0" step="0.01" required></label>
+            </div>
+                        <button type="submit" class="save-services-btn">Save Services</button>
                     </form>
                 </div>
             <?php endif; ?>

@@ -3,33 +3,21 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/Visit.php';
 class VisitRepository extends Repository
 {
+
+
     public function createVisit(array $visitData): void
     {
-        $connection = $this->database->connect();
-    
         try {
-
-            $connection->beginTransaction();
-
-            $stmt = $connection->prepare('
-                SELECT is_time_available(:petsitter_id, :start_date::DATE)
-            ');
-            $stmt->execute([
-                ':petsitter_id' => $visitData['petsitter_id'],
-                ':start_date' => $visitData['start_date']
-            ]);
+            error_log('Creating visit with data: ' . print_r($visitData, true));
             
-            if (!$stmt->fetchColumn()) {
-                throw new Exception('Petsitter is not available at this time');
-            }
-
-            $stmt = $connection->prepare('
+            $stmt = $this->database->connect()->prepare('
                 INSERT INTO public.visit 
                 (user_id, petsitter_id, care_type, start_date, end_date, pets)
                 VALUES (?, ?, ?, ?, ?, ?)
             ');
     
             $petsArray = '{' . implode(',', $visitData['pets']) . '}';
+            error_log('Prepared pets array: ' . $petsArray);
     
             $stmt->execute([
                 $visitData['user_id'],
@@ -40,13 +28,56 @@ class VisitRepository extends Repository
                 $petsArray
             ]);
     
-
-            $connection->commit();
-        } catch (Exception $e) {
-            $connection->rollBack();
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
             throw new Exception('Error creating visit: ' . $e->getMessage());
         }
     }
+    
+    // public function createVisit(array $visitData): void
+    // {
+    //     $connection = $this->database->connect();
+    
+    //     try {
+
+    //         $connection->beginTransaction();
+
+    //         $stmt = $connection->prepare('
+    //             SELECT is_time_available(:petsitter_id, :start_date::DATE)
+    //         ');
+    //         $stmt->execute([
+    //             ':petsitter_id' => $visitData['petsitter_id'],
+    //             ':start_date' => $visitData['start_date']
+    //         ]);
+            
+    //         if (!$stmt->fetchColumn()) {
+    //             throw new Exception('Petsitter is not available at this time');
+    //         }
+
+    //         $stmt = $connection->prepare('
+    //             INSERT INTO public.visit 
+    //             (user_id, petsitter_id, care_type, start_date, end_date, pets)
+    //             VALUES (?, ?, ?, ?, ?, ?)
+    //         ');
+    
+    //         $petsArray = '{' . implode(',', $visitData['pets']) . '}';
+    
+    //         $stmt->execute([
+    //             $visitData['user_id'],
+    //             $visitData['petsitter_id'],
+    //             $visitData['care_type'],
+    //             $visitData['start_date'],
+    //             $visitData['end_date'],
+    //             $petsArray
+    //         ]);
+    
+
+    //         $connection->commit();
+    //     } catch (Exception $e) {
+    //         $connection->rollBack();
+    //         throw new Exception('Error creating visit: ' . $e->getMessage());
+    //     }
+    // }
     
 
     public function getVisitsByUserId(int $userId): array {
